@@ -55,7 +55,7 @@ Then a reference is created for the specified item to the new tag.
 
 To run a simple example installation, pull and run the docker image with this command:
 ```
-docker run TODO
+docker run codewrightio/tagcat:latest -p 5037:5037
 ```
 
 This will run the container using a simple SqlLite database.
