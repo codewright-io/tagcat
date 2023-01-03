@@ -1,10 +1,10 @@
 <div align="center">
-  <img alt="TagCat logo" src="https://raw.githubusercontent.com/EugeneScully/metadata/main/tagcat.png?token=GHSAT0AAAAAAB2QZLRSPRA3LPLHQH2KYJ2EY5TXJ5A" width="200px" />
+  <img alt="TagCat logo" src="https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat.png" width="200px" />
 
 A service for tagging, labeling, and attaching metadata to objects inside your application.
 
-  ![Build Status](https://github.com/EugeneScully/metadata/actions/workflows/dotnet.yml/badge.svg?branch=main)
-  ![Docker Status](https://github.com/EugeneScully/metadata/actions/workflows/docker-image.yml/badge.svg?branch=main)
+  ![Build Status](https://github.com/codewright-io/tagcat/actions/workflows/dotnet.yml/badge.svg?branch=main)
+  ![Docker Status](https://github.com/codewright-io/tagcat/actions/workflows/docker-image.yml/badge.svg?branch=main)
 </div>
 
 ## Concepts
