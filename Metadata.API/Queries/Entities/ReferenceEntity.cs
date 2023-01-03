@@ -5,17 +5,17 @@ using CodeWright.Metadata.API.Model;
 namespace CodeWright.Metadata.API.Queries.Entities;
 
 /// <summary>
-/// The database reference table
+/// The database relationship table
 /// </summary>
-public class ReferenceEntity : EntityBase
+public class RelationshipEntity : EntityBase
 {
     /// <summary>
-    /// The type of reference
+    /// The type of relationship
     /// </summary>
-    public ReferenceType Type { get; init; }
+    public RelationshipType Type { get; init; }
 
     /// <summary>
-    /// The target ID of the referenced object
+    /// The target ID of the relationship
     /// </summary>
     [Required, StringLength(Identifiers.MaximumLength)]
     public string TargetId { get; init; } = string.Empty;

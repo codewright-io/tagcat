@@ -43,17 +43,17 @@ namespace CodeWright.Metadata.API.Model
                     case ItemMetadataAddedEvent addMetadataEvent:
                         item.AddMetadata(addMetadataEvent.AddedMetadata, addMetadataEvent.Version, addMetadataEvent.Time, addMetadataEvent.UserId, addMetadataEvent.SourceId);
                         break;
-                    case ItemReferencesAddedEvent addReferenceEvent:
-                        item.AddReferences(addReferenceEvent.AddedReferences, addReferenceEvent.Version, addReferenceEvent.Time, addReferenceEvent.UserId, addReferenceEvent.SourceId);
+                    case ItemRelationshipsAddedEvent addRelationshipsEvent:
+                        item.AddRelationships(addRelationshipsEvent.AddedRelationships, addRelationshipsEvent.Version, addRelationshipsEvent.Time, addRelationshipsEvent.UserId, addRelationshipsEvent.SourceId);
                         break;
                     case ItemMetadataRemovedEvent removeMetadataEvent:
                         item.RemoveMetadata(removeMetadataEvent.RemovedMetadata, removeMetadataEvent.Version, removeMetadataEvent.Time, removeMetadataEvent.UserId, removeMetadataEvent.SourceId);
                         break;
-                    case ItemReferencesRemovedEvent removeReferencesEvent:
-                        item.RemoveReferences(removeReferencesEvent.RemovedReferences, removeReferencesEvent.Version, removeReferencesEvent.Time, removeReferencesEvent.UserId, removeReferencesEvent.SourceId);
+                    case ItemRelationshipsRemovedEvent removeRelationshipsEvent:
+                        item.RemoveReltionships(removeRelationshipsEvent.RemovedRelationships, removeRelationshipsEvent.Version, removeRelationshipsEvent.Time, removeRelationshipsEvent.UserId, removeRelationshipsEvent.SourceId);
                         break;
                     default:
-                        throw new InvalidOperationException("Unrecognised event");
+                        throw new InvalidOperationException("Unrecognized event");
                 }
             }
 

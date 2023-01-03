@@ -1,12 +1,12 @@
 ﻿namespace CodeWright.Metadata.API.Model;
 
 /// <summary>
-/// The type of reference
+/// The type of relationship
 /// </summary>
-public enum ReferenceType
+public enum RelationshipType
 {
     /// <summary>
-    /// No reference type specified. Do not use.
+    /// No relationship type specified. Do not use.
     /// </summary>
     Undefined = 0,
 

@@ -46,7 +46,7 @@ namespace CodeWright.Metadata.API.Migrations
                     b.ToTable("Metadata");
                 });
 
-            modelBuilder.Entity("CodeWright.Metadata.API.Queries.Entities.ReferenceEntity", b =>
+            modelBuilder.Entity("CodeWright.Metadata.API.Queries.Entities.RelationshipEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(40)
@@ -69,7 +69,7 @@ namespace CodeWright.Metadata.API.Migrations
 
                     b.HasIndex("Id", "TenantId");
 
-                    b.ToTable("References");
+                    b.ToTable("Relationships");
                 });
 #pragma warning restore 612, 618
         }

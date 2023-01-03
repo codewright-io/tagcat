@@ -53,15 +53,15 @@ public static class DependencyInjectionExtensions
         services.AddScoped<ICommandHandler<ItemMetadataSetCommand>>(
             p => new ValidatingCommandHandler<ItemMetadataSetCommand, ItemMetadataSetCommandValidator>(p.GetRequiredService<ItemMetadataCommandHandler>()));
 
-        // Add reference command handling
-        services.AddScoped<ItemReferenceCommandHandler>();
+        // Add relationship command handling
+        services.AddScoped<ItemRelationshipsCommandHandler>();
 
-        services.AddScoped<ICommandHandler<ItemReferencesSetCommand>>(
-            p => new ValidatingCommandHandler<ItemReferencesSetCommand, ItemReferencesSetCommandValidator>(p.GetRequiredService<ItemReferenceCommandHandler>()));
-        services.AddScoped<ICommandHandler<ItemReferencesAddCommand>>(
-            p => new ValidatingCommandHandler<ItemReferencesAddCommand, ItemReferencesAddCommandValidator>(p.GetRequiredService<ItemReferenceCommandHandler>()));
-        services.AddScoped<ICommandHandler<ItemReferencesRemoveCommand>>(
-            p => new ValidatingCommandHandler<ItemReferencesRemoveCommand, ItemReferencesRemoveCommandValidator>(p.GetRequiredService<ItemReferenceCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemRelationshipsSetCommand>>(
+            p => new ValidatingCommandHandler<ItemRelationshipsSetCommand, ItemRelationshipSetCommandValidator>(p.GetRequiredService<ItemRelationshipsCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemRelationshipsAddCommand>>(
+            p => new ValidatingCommandHandler<ItemRelationshipsAddCommand, ItemRelationshipsAddCommandValidator>(p.GetRequiredService<ItemRelationshipsCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemRelationshipsRemoveCommand>>(
+            p => new ValidatingCommandHandler<ItemRelationshipsRemoveCommand, ItemRelationshipsRemoveCommandValidator>(p.GetRequiredService<ItemRelationshipsCommandHandler>()));
 
         // Add tag command handling
         services.AddScoped<ItemTagCommandHandler>();
@@ -83,7 +83,7 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection AddMetadataViewUpdaters(this IServiceCollection services)
     {
         services.AddWithEventHandlers<ItemMetadataUpdater>();
-        services.AddWithEventHandlers<ItemReferenceUpdater>();
+        services.AddWithEventHandlers<ItemRelationshipUpdater>();
 
         return services;
     }
@@ -106,7 +106,7 @@ public static class DependencyInjectionExtensions
         services.AddScoped<IItemTagQuery, ItemTagQuery>();
         services.AddScoped<IItemDetailQuery, ItemDetailQuery>();
         services.AddScoped<IItemMetadataQuery, ItemMetadataQuery>();
-        services.AddScoped<IItemReferenceQuery, ItemReferenceQuery>();
+        services.AddScoped<IItemRelationshipQuery, ItemRelationshipQuery>();
 
         return services;
     }

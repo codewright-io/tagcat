@@ -22,4 +22,4 @@ RUN dotnet publish "Metadata.API.csproj" -c Release -o /app/publish /p:UseAppHos
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Metadata.API.dll"]
+ENTRYPOINT ["dotnet", "CodeWright.Metadata.API.dll"]

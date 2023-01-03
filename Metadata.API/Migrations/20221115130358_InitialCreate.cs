@@ -26,7 +26,7 @@ namespace CodeWright.Metadata.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "References",
+                name: "Relationships",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
@@ -37,7 +37,7 @@ namespace CodeWright.Metadata.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_References", x => new { x.Id, x.TenantId, x.Type, x.TargetId });
+                    table.PrimaryKey("PK_Relationships", x => new { x.Id, x.TenantId, x.Type, x.TargetId });
                 });
 
             migrationBuilder.CreateIndex(
@@ -51,8 +51,8 @@ namespace CodeWright.Metadata.API.Migrations
                 columns: new[] { "TenantId", "Name", "Value" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_References_Id_TenantId",
-                table: "References",
+                name: "IX_Relationships_Id_TenantId",
+                table: "Relationships",
                 columns: new[] { "Id", "TenantId" });
         }
 
@@ -63,7 +63,7 @@ namespace CodeWright.Metadata.API.Migrations
                 name: "Metadata");
 
             migrationBuilder.DropTable(
-                name: "References");
+                name: "Relationships");
         }
     }
 }

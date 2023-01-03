@@ -11,11 +11,11 @@ A service for tagging, labeling, and attaching metadata to objects inside your a
 
 This service supports storing three types of information about objects or items in a system.
 
-1. Metadata - Key/value information to attach to an item.
-2. Tag - Tagging or labeling an item.
-3. References - Links, references, or relationships between items. (TODO: Should we rename this to relationships?)
+1. Metadata - Key/value information to attach to an item
+2. Tag - Tagging or labeling an item
+3. Relationships - Links, references, or relationships between items
 
-For tags, internally in the database or the service model, represents the tag as an item, and then stores items that have this tag as a reference to the tag.
+For tags, internally in the database or the service model, represents the tag as an item, and then stores items that have this tag as a relationship to the tag.
 
 This allows users of the service to store extra relationship information about the tags, such as translations of the tag, or saying that one tag is a subclass of another tag.
 
@@ -48,19 +48,21 @@ There are a few core metadata names recognized by the service:
 
 When the tag APIs are used, internally a tag item will be created with an ID, Display Name, and Culture.
 Internally the if the tag is not recognized, it will be created with name and culture metadata.
-Then a reference is created for the specified item to the new tag.
+Then a relationship is created for the specified item to the new tag.
 
 
 ## Getting Started
 
 To run a simple example installation, pull and run the docker image with this command:
 ```
-docker run codewrightio/tagcat:latest -p 5037:5037
+docker run codewrightio/tagcat:latest -p 80:5037
 ```
 
-This will run the container using a simple SqlLite database.
+Then navigate to http://localhost:5037/swagger/index.html to view the swagger interface.
 
-The service also supports PostgreSQL or MSSQL.
+This will run the container using a file based SQLite database, so by default data will not persist unless you mount the .db files as volume bind mounts.
+
+The service also supports PostgreSQL, MySQL, or MSSQL.
 
 The following environment variables are supported:
 ```

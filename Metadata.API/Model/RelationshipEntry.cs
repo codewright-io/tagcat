@@ -3,17 +3,17 @@
 namespace CodeWright.Metadata.API.Model;
 
 /// <summary>
-/// Reference information on an item
+/// Relationship information on an item
 /// </summary>
-public class ReferenceEntry : IEquatable<ReferenceEntry>
+public class RelationshipEntry : IEquatable<RelationshipEntry>
 {
     /// <summary>
-    /// The type of reference
+    /// The type of relationship
     /// </summary>
-    public ReferenceType Type { get; init; }
+    public RelationshipType Type { get; init; }
 
     /// <summary>
-    /// The target ID of the referenced object
+    /// The target ID of the relationship
     /// </summary>
     [Required]
     public string TargetId { get; init; } = string.Empty;
@@ -22,7 +22,7 @@ public class ReferenceEntry : IEquatable<ReferenceEntry>
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
-        return Equals(obj as ReferenceEntry);
+        return Equals(obj as RelationshipEntry);
     }
 
     /// <inheritdoc/>
@@ -32,7 +32,7 @@ public class ReferenceEntry : IEquatable<ReferenceEntry>
     }
 
     /// <inheritdoc/>
-    public bool Equals(ReferenceEntry? other)
+    public bool Equals(RelationshipEntry? other)
     {
         if (other == null)
             return false;

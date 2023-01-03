@@ -36,8 +36,8 @@ public class ItemDetailQuery : IItemDetailQuery
             .GroupBy(m => m.Id)
             .ToListAsync();
 
-        // Fetch the references for these IDs
-        var itemReferences = await _context.References.AsNoTracking()
+        // Fetch the relationships for these IDs
+        var itemRelationships = await _context.Relationships.AsNoTracking()
             .Where(m => ids.Contains(m.Id))
             .Where(m => m.TenantId == tenantId)
             .GroupBy(m => m.Id)
@@ -52,9 +52,9 @@ public class ItemDetailQuery : IItemDetailQuery
                 Metadata = itemMetadata
                     .Where(r => r.Key == id)
                     .SelectMany(m => m.Select(g => new MetadataEntry {  Name = g.Name, Value = g.Value })),
-                References = itemReferences
+                Relationships = itemRelationships
                     .Where(r => r.Key == id)
-                    .SelectMany(m => m.Select(g => new ReferenceEntry { TargetId = g.TargetId, Type = g.Type })),
+                    .SelectMany(m => m.Select(g => new RelationshipEntry { TargetId = g.TargetId, Type = g.Type })),
             });
 
         return results;

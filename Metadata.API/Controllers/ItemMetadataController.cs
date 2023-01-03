@@ -54,7 +54,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="tenantId">The tenant ID for the item</param>
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of metadata on the item</returns>
-    [HttpGet("{tenantid}/{id}")]
+    [HttpGet("{tenantId}/{id}")]
     public Task<IEnumerable<MetadataEntry>> GetByIdAsync([FromServices] IItemMetadataQuery query, string tenantId, string id)
         => query.FetchForIdAsync(id, tenantId);
 

@@ -74,8 +74,8 @@ public class ItemTagsController : ControllerBase
     /// <param name="culture">An optional two letter ISO culture to fetch the tags for</param>
     /// <param name="tenantId">The tenant ID for the item</param>
     /// <param name="id">The ID of the item</param>
-    /// <returns>A list of references on the item</returns>
-    [HttpGet("{tenantid}/{id}")]
+    /// <returns>A list of relationships on the item</returns>
+    [HttpGet("{tenantId}/{id}")]
     public Task<IEnumerable<ItemTagViewEntry>> GetByIdAsync(
         [FromServices] IItemTagQuery query,
         [FromServices] IHttpContextAccessor contextAccessor,

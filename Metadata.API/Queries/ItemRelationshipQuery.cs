@@ -5,36 +5,36 @@ using Microsoft.EntityFrameworkCore;
 namespace CodeWright.Metadata.API.Queries;
 
 /// <summary>
-/// Reference related queries
+/// Relationship related queries
 /// </summary>
-public class ItemReferenceQuery : IItemReferenceQuery
+public class ItemRelationshipQuery : IItemRelationshipQuery
 {
     private readonly MetadataDbContext _context;
     private readonly IItemDetailQuery _detailQuery;
 
     /// <summary>
-    /// Create an instance of a ItemReferenceQuery
+    /// Create an instance of a ItemRelationshipQuery
     /// </summary>
-    public ItemReferenceQuery(MetadataDbContext context, IItemDetailQuery detailQuery)
+    public ItemRelationshipQuery(MetadataDbContext context, IItemDetailQuery detailQuery)
     {
         _context = context;
         _detailQuery = detailQuery;
     }
 
     /// <inheritdoc/>
-    public async Task<IEnumerable<ReferenceEntry>> FetchForIdAsync(string id, string tenantId)
+    public async Task<IEnumerable<RelationshipEntry>> FetchForIdAsync(string id, string tenantId)
     {
-        var matches = await _context.References.AsNoTracking()
+        var matches = await _context.Relationships.AsNoTracking()
             .Where(m => m.Id == id && m.TenantId == tenantId)
             .ToListAsync();
 
-        return matches.Select(m => new ReferenceEntry { Type = m.Type, TargetId = m.TargetId });
+        return matches.Select(m => new RelationshipEntry { Type = m.Type, TargetId = m.TargetId });
     }
 
     /// <inheritdoc/>
     public async Task<IEnumerable<string>> GetReferencingIdsAsync(string targetId, string tenantId)
     {
-        var matchIds = await _context.References.AsNoTracking()
+        var matchIds = await _context.Relationships.AsNoTracking()
             .Where(m => m.TargetId == targetId && m.TenantId == tenantId)
             .Select(m => m.Id)
             .Distinct()

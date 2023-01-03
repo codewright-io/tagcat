@@ -24,10 +24,10 @@ public class ItemTagQuery : IItemTagQuery
     public async Task<IEnumerable<ItemTagViewEntry>> FetchForIdAsync(string id, string tenantId, string culture)
     {
         // Get the item and its tags
-        var matches = await _context.References.AsNoTracking()
+        var matches = await _context.Relationships.AsNoTracking()
             .Where(item => item.Id == id)
             .Where(item => item.TenantId == tenantId)
-            .Where(item => item.Type == ReferenceType.Tag)
+            .Where(item => item.Type == RelationshipType.Tag)
             .Join(_context.Metadata.AsNoTracking(), item => item.TargetId, tagMetadata => tagMetadata.Id, 
                 (item, tagMetadata) => new { item, tagMetadata })
             .ToListAsync();

@@ -101,12 +101,12 @@ namespace CodeWright.Metadata.API.Commands
                 item.StartQueuing();
             }
 
-            // Check if the tags exist in the sustem, and if they don't, create them
+            // Check if the tags exist in the system, and if they don't, create them
             var tagIds = await CheckOrCreateTagItemsAsync(command.Tags, command.TenantId, command.Culture, userId);
 
-            // Add the tag as a reference to the tag item
-            var references = tagIds.Select(k => new ReferenceEntry { TargetId = k, Type = ReferenceType.Tag });
-            item.AddReferences(references, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            // Add the tag as a relationships to the tag item
+            var relationships = tagIds.Select(k => new RelationshipEntry { TargetId = k, Type = RelationshipType.Tag });
+            item.AddRelationships(relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };
@@ -124,11 +124,11 @@ namespace CodeWright.Metadata.API.Commands
             if (item == null)
                 throw new NotFoundException("Item not found");
 
-            // Check if the tags exist in the sustem, and if they don't, create them
+            // Check if the tags exist in the system, and if they don't, create them
             var tagIds = await CheckOrCreateTagItemsAsync(command.Tags, command.TenantId, command.Culture, userId);
 
-            var references = tagIds.Select(k => new ReferenceEntry { TargetId = k, Type = ReferenceType.Tag });
-            item.RemoveReferences(references, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            var relationships = tagIds.Select(k => new RelationshipEntry { TargetId = k, Type = RelationshipType.Tag });
+            item.RemoveReltionships(relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };
@@ -149,11 +149,11 @@ namespace CodeWright.Metadata.API.Commands
                 item.StartQueuing();
             }
 
-            // Check if the tags exist in the sustem, and if they don't, create them
+            // Check if the tags exist in the system, and if they don't, create them
             var tagIds = await CheckOrCreateTagItemsAsync(command.Tags, command.TenantId, command.Culture, userId);
 
-            var references = tagIds.Select(k => new ReferenceEntry { TargetId = k, Type = ReferenceType.Tag });
-            item.SetReferences(references, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            var relationships = tagIds.Select(k => new RelationshipEntry { TargetId = k, Type = RelationshipType.Tag });
+            item.SetRelationships(relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };

@@ -3,22 +3,22 @@
 namespace CodeWright.Metadata.API.Queries.Interfaces;
 
 /// <summary>
-/// Reference related queries
+/// Relationship related queries
 /// </summary>
-public interface IItemReferenceQuery
+public interface IItemRelationshipQuery
 {
     /// <summary>
-    /// Fetch references for an ID
+    /// Fetch relationship for an ID
     /// </summary>
-    Task<IEnumerable<ReferenceEntry>> FetchForIdAsync(string id, string tenantId);
+    Task<IEnumerable<RelationshipEntry>> FetchForIdAsync(string id, string tenantId);
 
     /// <summary>
-    /// Get items that reference an item and return their IDs
+    /// Get items that relationship an item and return their IDs
     /// </summary>
     Task<IEnumerable<string>> GetReferencingIdsAsync(string targetId, string tenantId);
 
     /// <summary>
-    /// Get items that reference an item
+    /// Get items that relationship an item
     /// </summary>
     Task<IEnumerable<ItemResult>> GetReferencingAsync(string targetId, string tenantId);
 }

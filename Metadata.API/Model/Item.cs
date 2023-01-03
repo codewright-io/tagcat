@@ -4,7 +4,7 @@ using CodeWright.Metadata.API.Events;
 namespace CodeWright.Metadata.API.Model;
 
 /// <summary>
-/// The core domain object that metadata and references are attached to
+/// The core domain object that metadata and relationships are attached to
 /// </summary>
 public class Item : DomainObjectBase
 {
@@ -15,9 +15,9 @@ public class Item : DomainObjectBase
     public static string DomainTypeId { get; } = "item";
 
     /// <summary>
-    /// A list of references or relationships that the object has to other objects.
+    /// A list of relationships or relationships that the object has to other objects.
     /// </summary>
-    public IEnumerable<ReferenceEntry> References { get; private set; } = Enumerable.Empty<ReferenceEntry>();
+    public IEnumerable<RelationshipEntry> Relationships { get; private set; } = Enumerable.Empty<RelationshipEntry>();
 
     /// <summary>
     /// A key/value list of metadata properties on the object.
@@ -136,25 +136,25 @@ public class Item : DomainObjectBase
     }
 
     /// <summary>
-    /// Add references for an item, ignoring any that already exist
+    /// Add relationships for an item, ignoring any that already exist
     /// </summary>
-    public void AddReferences(IEnumerable<ReferenceEntry> references, long version, DateTime time, string userId, string sourceId)
+    public void AddRelationships(IEnumerable<RelationshipEntry> relationships, long version, DateTime time, string userId, string sourceId)
     {
         // Filter out any doubles and work out what is added, updated
-        var addedItems = references.Except(References).Distinct().ToList();
+        var addedItems = relationships.Except(Relationships).Distinct().ToList();
 
-        References = References
+        Relationships = Relationships
             .Concat(addedItems)
             .Distinct()
             .ToList();
 
         if (addedItems.Any())
         {
-            QueueEvent(new ItemReferencesAddedEvent
+            QueueEvent(new ItemRelationshipsAddedEvent
             {
                 Id = Id,
                 TenantId = TenantId,
-                AddedReferences = addedItems,
+                AddedRelationships = addedItems,
                 UserId = userId,
                 SourceId = sourceId,
                 Time = time,
@@ -164,21 +164,21 @@ public class Item : DomainObjectBase
     }
 
     /// <summary>
-    /// Remove the specified references from an item
+    /// Remove the specified relationships from an item
     /// </summary>
-    public void RemoveReferences(IEnumerable<ReferenceEntry> references, long version, DateTime time, string userId, string sourceId)
+    public void RemoveReltionships(IEnumerable<RelationshipEntry> relationships, long version, DateTime time, string userId, string sourceId)
     {
         // Filter out any doubles and work out what is removed
-        var removedItems = References.Intersect(references).ToList();
-        References = References.Except(removedItems).Distinct().ToList();
+        var removedItems = Relationships.Intersect(relationships).ToList();
+        Relationships = Relationships.Except(removedItems).Distinct().ToList();
 
         if (removedItems.Any())
         {
-            QueueEvent(new ItemReferencesRemovedEvent
+            QueueEvent(new ItemRelationshipsRemovedEvent
             {
                 Id = Id,
                 TenantId = TenantId,
-                RemovedReferences = removedItems,
+                RemovedRelationships = removedItems,
                 UserId = userId,
                 SourceId = sourceId,
                 Time = time,
@@ -188,22 +188,22 @@ public class Item : DomainObjectBase
     }
 
     /// <summary>
-    /// Set all the references on an item, replacing any existing references
+    /// Set all the relationships on an item, replacing any existing relationships
     /// </summary>
-    public void SetReferences(IEnumerable<ReferenceEntry> references, long version, DateTime time, string userId, string sourceId)
+    public void SetRelationships(IEnumerable<RelationshipEntry> relationships, long version, DateTime time, string userId, string sourceId)
     {
         // Filter out any doubles and work out what is removed
-        var removedItems = References.Except(references).ToList();
-        var addedItems = references.Except(References).ToList();
-        References = new List<ReferenceEntry>(references);
+        var removedItems = Relationships.Except(relationships).ToList();
+        var addedItems = relationships.Except(Relationships).ToList();
+        Relationships = new List<RelationshipEntry>(relationships);
 
         if (removedItems.Any())
         {
-            QueueEvent(new ItemReferencesRemovedEvent
+            QueueEvent(new ItemRelationshipsRemovedEvent
             {
                 Id = Id,
                 TenantId = TenantId,
-                RemovedReferences = removedItems,
+                RemovedRelationships = removedItems,
                 UserId = userId,
                 SourceId = sourceId,
                 Time = time,
@@ -213,11 +213,11 @@ public class Item : DomainObjectBase
 
         if (addedItems.Any())
         {
-            QueueEvent(new ItemReferencesAddedEvent
+            QueueEvent(new ItemRelationshipsAddedEvent
             {
                 Id = Id,
                 TenantId = TenantId,
-                AddedReferences = addedItems,
+                AddedRelationships = addedItems,
                 UserId = userId,
                 SourceId = sourceId,
                 Time = time,

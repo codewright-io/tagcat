@@ -6,12 +6,12 @@ using CodeWright.Metadata.API.Model;
 namespace CodeWright.Metadata.API.Commands
 {
     /// <summary>
-    /// Handler for Item Reference Commands
+    /// Handler for Item Relationship Commands
     /// </summary>
-    public class ItemReferenceCommandHandler :
-        ICommandHandler<ItemReferencesAddCommand>,
-        ICommandHandler<ItemReferencesRemoveCommand>,
-        ICommandHandler<ItemReferencesSetCommand>
+    public class ItemRelationshipsCommandHandler :
+        ICommandHandler<ItemRelationshipsAddCommand>,
+        ICommandHandler<ItemRelationshipsRemoveCommand>,
+        ICommandHandler<ItemRelationshipsSetCommand>
     {
         private readonly IDomainRepository<Item> _repository;
         private readonly ITimeProvider _timeProvider;
@@ -20,14 +20,14 @@ namespace CodeWright.Metadata.API.Commands
         private readonly ILogger _log;
 
         /// <summary>
-        /// Create an instance of a ItemReferenceCommandHandler.
+        /// Create an instance of a ItemRelationshipsCommandHandler.
         /// </summary>
-        public ItemReferenceCommandHandler(
+        public ItemRelationshipsCommandHandler(
             IDomainRepository<Item> repository,
             ITimeProvider timeProvider,
             IVersionProvider versionProvider,
             ServiceSettings settings,
-            ILogger<ItemReferenceCommandHandler> log)
+            ILogger<ItemRelationshipsCommandHandler> log)
         {
             _repository = repository;
             _timeProvider = timeProvider;
@@ -39,7 +39,7 @@ namespace CodeWright.Metadata.API.Commands
         /// <summary>
         /// Handle the command
         /// </summary>
-        public async Task<CommandResult> HandleAsync(ItemReferencesAddCommand command, string userId)
+        public async Task<CommandResult> HandleAsync(ItemRelationshipsAddCommand command, string userId)
         {
             var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
             if (item == null)
@@ -48,7 +48,7 @@ namespace CodeWright.Metadata.API.Commands
                 item.StartQueuing();
             }
 
-            item.AddReferences(command.References, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            item.AddRelationships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };
@@ -57,13 +57,13 @@ namespace CodeWright.Metadata.API.Commands
         /// <summary>
         /// Handle the command
         /// </summary>
-        public async Task<CommandResult> HandleAsync(ItemReferencesRemoveCommand command, string userId)
+        public async Task<CommandResult> HandleAsync(ItemRelationshipsRemoveCommand command, string userId)
         {
             var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
             if (item == null)
                 throw new NotFoundException("Item not found");
 
-            item.RemoveReferences(command.References, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            item.RemoveReltionships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };
@@ -72,7 +72,7 @@ namespace CodeWright.Metadata.API.Commands
         /// <summary>
         /// Handle the command
         /// </summary>
-        public async Task<CommandResult> HandleAsync(ItemReferencesSetCommand command, string userId)
+        public async Task<CommandResult> HandleAsync(ItemRelationshipsSetCommand command, string userId)
         {
             var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
             if (item == null)
@@ -81,7 +81,7 @@ namespace CodeWright.Metadata.API.Commands
                 item.StartQueuing();
             }
 
-            item.SetReferences(command.References, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            item.SetRelationships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };

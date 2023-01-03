@@ -9,10 +9,10 @@ namespace CodeWright.Metadata.API.Tests
 
         public static string ItemMetadata(string tenantId, string id) => $"api/items/metadata/v1/{tenantId}/{id}";
 
-        public static string ItemReferences(string tenantId, string id) => $"api/items/references/v1/{tenantId}/{id}";
+        public static string ItemRelationships(string tenantId, string id) => $"api/items/relationships/v1/{tenantId}/{id}";
 
         public static string Referencing(string tenantId, string targetId) 
-            => $"api/items/references/v1/referencing/{tenantId}/{targetId}";
+            => $"api/items/relationships/v1/referencing/{tenantId}/{targetId}";
 
         public static string ItemTags(string tenantId, string id) => $"api/items/tags/v1/{tenantId}/{id}";
 

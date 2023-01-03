@@ -15,10 +15,10 @@ namespace Metadata.API.Controllers;
 public class ItemsController : ControllerBase
 {
     /// <summary>
-    /// Set all the metadata and references on an item, replacing any existing metadata and references
+    /// Set all the metadata and relationships on an item, replacing any existing metadata and relationships
     /// </summary>
     /// <param name="handler">The command handler</param>
-    /// <param name="command">The set references command</param>
+    /// <param name="command">The set relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost]
     public Task<CommandResult> SetAsync(
@@ -27,7 +27,7 @@ public class ItemsController : ControllerBase
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
-    /// Remove all the metadata and references on an item
+    /// Remove all the metadata and relationships on an item
     /// </summary>
     /// <param name="handler">The command handler</param>
     /// <param name="tenantId">The tenant ID for the item</param>
@@ -41,13 +41,13 @@ public class ItemsController : ControllerBase
         => handler.HandleAsync(new ItemRemoveAllCommand {TenantId = tenantId, Id = id }, HttpContext.GetUserId() ?? "");
 
     /// <summary>
-    /// Fetch an item's metadata and references
+    /// Fetch an item's metadata and relationships
     /// </summary>
     /// <param name="query">The query handler</param>
     /// <param name="tenantId">The tenant ID for the item</param>
     /// <param name="id">The ID of the item</param>
     /// <returns>The item details</returns>
-    [HttpGet("{tenantid}/{id}")]
+    [HttpGet("{tenantId}/{id}")]
     public Task<ItemResult> GetByIdAsync(
         [FromServices] IItemDetailQuery query, 
         string tenantId,
@@ -63,7 +63,7 @@ public class ItemsController : ControllerBase
     /// <param name="fromVersion">The version to start from. Omit to start from the beginning.</param>
     /// <param name="limit">The maximum number of events to fetch</param>
     /// <returns>The item events</returns>
-    [HttpGet("events/{tenantid}/{id}")]
+    [HttpGet("events/{tenantId}/{id}")]
     public Task<IEnumerable<IDomainEvent>> GetEventsByIdAsync(
         [FromServices] IEventStore eventStore,
         string tenantId,

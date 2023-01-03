@@ -20,9 +20,9 @@ public class MetadataDbContext : DbContext
     public DbSet<MetadataEntity> Metadata { get; set; } = null!;
 
     /// <summary>
-    /// References table
+    /// Relationships table
     /// </summary>
-    public DbSet<ReferenceEntity> References { get; set; } = null!;
+    public DbSet<RelationshipEntity> Relationships { get; set; } = null!;
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ public class MetadataDbContext : DbContext
         // Index for metadata search
         modelBuilder.Entity<MetadataEntity>().HasIndex(p => new { p.TenantId, p.Name, p.Value });
 
-        modelBuilder.Entity<ReferenceEntity>().HasKey(p => new { p.Id, p.TenantId, p.Type, p.TargetId });
-        modelBuilder.Entity<ReferenceEntity>().HasIndex(p => new { p.Id, p.TenantId });
+        modelBuilder.Entity<RelationshipEntity>().HasKey(p => new { p.Id, p.TenantId, p.Type, p.TargetId });
+        modelBuilder.Entity<RelationshipEntity>().HasIndex(p => new { p.Id, p.TenantId });
     }
 }

@@ -10,7 +10,7 @@ namespace CodeWright.Metadata.API.Commands
         ICommandHandler<ItemSetAllCommand>,
         ICommandHandler<ItemRemoveAllCommand>
     {
-        private readonly ICommandHandler<ItemReferencesSetCommand> _referencesHandler;
+        private readonly ICommandHandler<ItemRelationshipsSetCommand> _relationshipsHandler;
         private readonly ICommandHandler<ItemMetadataSetCommand> _metadataHandler;
         private readonly ILogger _log;
 
@@ -18,11 +18,11 @@ namespace CodeWright.Metadata.API.Commands
         /// Create an instance of a ItemCommandHandler.
         /// </summary>
         public ItemCommandHandler(
-            ICommandHandler<ItemReferencesSetCommand> referencesHandler,
+            ICommandHandler<ItemRelationshipsSetCommand> relationshipsHandler,
             ICommandHandler<ItemMetadataSetCommand> metadataHandler,
             ILogger<ItemCommandHandler> log)
         {
-            _referencesHandler = referencesHandler;
+            _relationshipsHandler = relationshipsHandler;
             _metadataHandler = metadataHandler;
             _log = log;
         }
@@ -32,11 +32,11 @@ namespace CodeWright.Metadata.API.Commands
         /// </summary>
         public async Task<CommandResult> HandleAsync(ItemSetAllCommand command, string userId)
         {
-            var referenceResult = await _referencesHandler.HandleAsync(new ItemReferencesSetCommand 
+            var relationshipsResult = await _relationshipsHandler.HandleAsync(new ItemRelationshipsSetCommand 
             { 
                 TenantId = command.TenantId,
                 Id = command.TenantId,
-                References = command.References,
+                Relationships = command.Relationships,
             }, userId);
             var metadataResult = await _metadataHandler.HandleAsync(new ItemMetadataSetCommand
             {
@@ -45,7 +45,7 @@ namespace CodeWright.Metadata.API.Commands
                 Metadata = command.Metadata,
             }, userId);
 
-            return new CommandResult { Version = long.Max(referenceResult.Version, metadataResult.Version) };
+            return new CommandResult { Version = long.Max(relationshipsResult.Version, metadataResult.Version) };
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace CodeWright.Metadata.API.Commands
                 TenantId = command.TenantId,
                 Id = command.TenantId,
                 Metadata = Enumerable.Empty<MetadataEntry>(),
-                References = Enumerable.Empty<ReferenceEntry>(),
+                Relationships = Enumerable.Empty<RelationshipEntry>(),
             }, userId);
         }
     }

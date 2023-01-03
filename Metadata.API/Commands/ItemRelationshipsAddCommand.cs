@@ -4,13 +4,13 @@ using CodeWright.Metadata.API.Model;
 namespace CodeWright.Metadata.API.Commands;
 
 /// <summary>
-/// Command to add references from one item to others.
+/// Command to add relationships from one item to others.
 /// </summary>
-public class ItemReferencesAddCommand : ItemCommandBase
+public class ItemRelationshipsAddCommand : ItemCommandBase
 {
     /// <summary>
     /// A list of references or relationships that the object has to other objects.
     /// </summary>
     [Required]
-    public IEnumerable<ReferenceEntry> References { get; init; } = Enumerable.Empty<ReferenceEntry>();
+    public IEnumerable<RelationshipEntry> Relationships { get; init; } = Enumerable.Empty<RelationshipEntry>();
 }

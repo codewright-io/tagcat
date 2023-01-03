@@ -3,7 +3,7 @@
 namespace CodeWright.Metadata.API.Commands;
 
 /// <summary>
-/// Command to set all metadata and references on an item, replacing the existing metadata and references.
+/// Command to set all metadata and relationships on an item, replacing the existing metadata and relationships.
 /// </summary>
 public class ItemSetAllCommand : ItemCommandBase
 {
@@ -15,5 +15,5 @@ public class ItemSetAllCommand : ItemCommandBase
     /// <summary>
     /// A list of references or relationships that the object has to other objects.
     /// </summary>
-    public IEnumerable<ReferenceEntry> References { get; init; } = Enumerable.Empty<ReferenceEntry>();
+    public IEnumerable<RelationshipEntry> Relationships { get; init; } = Enumerable.Empty<RelationshipEntry>();
 }

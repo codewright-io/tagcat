@@ -31,7 +31,7 @@ public class ItemResult
     /// <summary>
     /// A list of references or relationships that the object has to other objects.
     /// </summary>
-    public IEnumerable<ReferenceEntry> References { get; init; } = Enumerable.Empty<ReferenceEntry>();
+    public IEnumerable<RelationshipEntry> Relationships { get; init; } = Enumerable.Empty<RelationshipEntry>();
 
     /// <summary>
     /// A key/value list of metadata properties on the object.
