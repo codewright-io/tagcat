@@ -1,0 +1,113 @@
+﻿using CodeWright.Common;
+using CodeWright.Common.Asp;
+using CodeWright.Common.EventSourcing;
+using CodeWright.Metadata.API.Commands;
+using CodeWright.Metadata.API.Commands.Validation;
+using CodeWright.Metadata.API.Events;
+using CodeWright.Metadata.API.Model;
+using CodeWright.Metadata.API.Queries;
+using CodeWright.Metadata.API.Queries.Interfaces;
+
+namespace Microsoft.Extensions.DependencyInjection;
+
+/// <summary>
+/// Service registration extensions
+/// </summary>
+public static class DependencyInjectionExtensions
+{
+    /// <summary>
+    /// Register all metadata service
+    /// </summary>
+    public static IServiceCollection AddAllMetadataService(this IServiceCollection services, ServiceSettings settings)
+    {
+        services.AddEntityFrameworkEventSourcing(settings.Database, settings.EventConnectionString);
+        services.AddEvents<Item, ItemFactory>(typeof(ItemMetadataAddedEvent).Assembly);
+        services.AddMetadataViewDatabase(settings.Database, settings.ViewConnectionString);
+        services.AddMetadataCommands();
+        services.AddMetadataQueries();
+        services.AddMetadataViewUpdaters();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Register command handlers and validators
+    /// </summary>
+    /// <param name="services"></param>
+    public static IServiceCollection AddMetadataCommands(this IServiceCollection services)
+    {
+        services.AddScoped<ItemCommandHandler>();
+
+        services.AddScoped<ICommandHandler<ItemSetAllCommand>>(
+           p => new ValidatingCommandHandler<ItemSetAllCommand, ItemSetAllCommandValidator>(p.GetRequiredService<ItemCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemRemoveAllCommand>>(
+           p => new ValidatingCommandHandler<ItemRemoveAllCommand, ItemRemoveAllCommandValidator>(p.GetRequiredService<ItemCommandHandler>()));
+
+        // Add metadata command handling
+        services.AddScoped<ItemMetadataCommandHandler>();
+
+        services.AddScoped<ICommandHandler<ItemMetadataAddCommand>>(
+            p => new ValidatingCommandHandler<ItemMetadataAddCommand, ItemMetadataAddCommandValidator>(p.GetRequiredService<ItemMetadataCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemMetadataRemoveCommand>>(
+            p => new ValidatingCommandHandler<ItemMetadataRemoveCommand, ItemMetadataRemoveCommandValidator>(p.GetRequiredService<ItemMetadataCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemMetadataSetCommand>>(
+            p => new ValidatingCommandHandler<ItemMetadataSetCommand, ItemMetadataSetCommandValidator>(p.GetRequiredService<ItemMetadataCommandHandler>()));
+
+        // Add reference command handling
+        services.AddScoped<ItemReferenceCommandHandler>();
+
+        services.AddScoped<ICommandHandler<ItemReferencesSetCommand>>(
+            p => new ValidatingCommandHandler<ItemReferencesSetCommand, ItemReferencesSetCommandValidator>(p.GetRequiredService<ItemReferenceCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemReferencesAddCommand>>(
+            p => new ValidatingCommandHandler<ItemReferencesAddCommand, ItemReferencesAddCommandValidator>(p.GetRequiredService<ItemReferenceCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemReferencesRemoveCommand>>(
+            p => new ValidatingCommandHandler<ItemReferencesRemoveCommand, ItemReferencesRemoveCommandValidator>(p.GetRequiredService<ItemReferenceCommandHandler>()));
+
+        // Add tag command handling
+        services.AddScoped<ItemTagCommandHandler>();
+
+        services.AddScoped<ICommandHandler<ItemTagsAddCommand>>(
+            p => new ValidatingCommandHandler<ItemTagsAddCommand, ItemTagsAddCommandValidator>(p.GetRequiredService<ItemTagCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemTagsRemoveCommand>>(
+            p => new ValidatingCommandHandler<ItemTagsRemoveCommand, ItemTagsRemoveCommandValidator>(p.GetRequiredService<ItemTagCommandHandler>()));
+        services.AddScoped<ICommandHandler<ItemTagsSetCommand>>(
+            p => new ValidatingCommandHandler<ItemTagsSetCommand, ItemTagsSetCommandValidator>(p.GetRequiredService<ItemTagCommandHandler>()));
+
+
+        return services;
+    }
+
+    /// <summary>
+    /// Register view updaters
+    /// </summary>
+    public static IServiceCollection AddMetadataViewUpdaters(this IServiceCollection services)
+    {
+        services.AddWithEventHandlers<ItemMetadataUpdater>();
+        services.AddWithEventHandlers<ItemReferenceUpdater>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Register command handlers and validators
+    /// </summary>
+    public static IServiceCollection AddMetadataViewDatabase(this IServiceCollection services, DatabaseType database, string connectionString)
+    {
+        services.AddDbContext<MetadataDbContext>(options => options.UseDatabase(database, connectionString, "CodeWright.Metadata.API"));
+
+        return services;
+    }
+
+    /// <summary>
+    /// Register queries
+    /// </summary>
+    public static IServiceCollection AddMetadataQueries(this IServiceCollection services)
+    {
+        services.AddScoped<IItemTagQuery, ItemTagQuery>();
+        services.AddScoped<IItemDetailQuery, ItemDetailQuery>();
+        services.AddScoped<IItemMetadataQuery, ItemMetadataQuery>();
+        services.AddScoped<IItemReferenceQuery, ItemReferenceQuery>();
+
+        return services;
+    }
+}
