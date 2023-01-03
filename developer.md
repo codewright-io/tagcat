@@ -43,7 +43,7 @@ dotnet ef migrations add InitialCreate
 
 Deployment Tasks:
 - Push docker containers
-- Versioning and release process
+- Versioning and release process using github releases
 
 Documentation Tasks:
 - README includes how to run, install
