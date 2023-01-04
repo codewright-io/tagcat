@@ -55,6 +55,7 @@ Documentation Tasks:
 Development Tasks:
 - Work out scaling
 - Add API to search items by tags and types
+- Do we want to include aliased tags, subcategory tags in tag search results? Or add a search parameter?
 - Search on time ranges, number ranges for metadata search?
 
 

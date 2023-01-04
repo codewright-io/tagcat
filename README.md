@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="TagCat logo" src="https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat.png" width="200px" />
+  <img alt="TagCat logo" src="https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat_sml.png" width="200px" />
 
 A service for tagging, labeling, and attaching metadata to objects inside your application.
 
