@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="TagCat logo" src="https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat_sml.png" width="200px" />
+  <img alt="TagCat logo" src="https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat_sml.png" width="150px" />
 
 A service for tagging, labeling, and attaching metadata to objects inside your application.
 
@@ -73,5 +73,5 @@ DATABASE_VIEW_CONNECTION={Connection string for the view database}
 
 To initialize a database run the following command:
 ```
-docker run TODO
+docker run codewrightio/tagcat-install:latest -e DATABASE=SQLite
 ```

@@ -21,9 +21,11 @@ public class ItemsController : ControllerBase
     /// <param name="command">The set relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemSetAllCommand> handler,
-        ItemSetAllCommand command)
+        [FromBody] ItemSetAllCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -68,7 +70,7 @@ public class ItemsController : ControllerBase
         [FromServices] IEventStore eventStore,
         string tenantId,
         string id,
-        long? fromVersion = null,
-        int limit = 20)
+        [FromQuery] long? fromVersion = null,
+        [FromQuery] int limit = 20)
         => eventStore.GetByIdAsync(id, tenantId, fromVersion ?? -1, limit);
 }

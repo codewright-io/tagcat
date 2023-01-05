@@ -8,7 +8,7 @@ You can contribute by reporting bugs, pull-requests to fix bugs, or to add featu
 
 ### Bug Reporting
 
-Please file a bug report including environment and clear steps to reproduce.
+Please file a bug report as a github issue, including environment and clear steps to reproduce.
 
 ### Pull Requests
 

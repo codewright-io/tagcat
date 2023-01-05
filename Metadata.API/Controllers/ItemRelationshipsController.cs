@@ -22,7 +22,9 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="command">The set relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost]
-    public Task<CommandResult> SetAsync([FromServices] ICommandHandler<ItemRelationshipsSetCommand> handler, ItemRelationshipsSetCommand command)
+    public Task<CommandResult> SetAsync(
+        [FromServices] ICommandHandler<ItemRelationshipsSetCommand> handler,
+        [FromBody] ItemRelationshipsSetCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -32,7 +34,9 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="command">The add relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost("add")]
-    public Task<CommandResult> AddAsync([FromServices] ICommandHandler<ItemRelationshipsAddCommand> handler, ItemRelationshipsAddCommand command)
+    public Task<CommandResult> AddAsync(
+        [FromServices] ICommandHandler<ItemRelationshipsAddCommand> handler,
+        [FromBody] ItemRelationshipsAddCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -42,7 +46,9 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="command">The remove relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost("remove")]
-    public Task<CommandResult> RemoveAsync([FromServices] ICommandHandler<ItemRelationshipsRemoveCommand> handler, ItemRelationshipsRemoveCommand command)
+    public Task<CommandResult> RemoveAsync(
+        [FromServices] ICommandHandler<ItemRelationshipsRemoveCommand> handler,
+        [FromBody] ItemRelationshipsRemoveCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -53,7 +59,10 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of relationships on the item</returns>
     [HttpGet("{tenantId}/{id}")]
-    public Task<IEnumerable<RelationshipEntry>> GetByIdAsync([FromServices] IItemRelationshipQuery query, string tenantId, string id)
+    public Task<IEnumerable<RelationshipEntry>> GetByIdAsync(
+        [FromServices] IItemRelationshipQuery query, 
+        string tenantId, 
+        string id)
         => query.FetchForIdAsync(id, tenantId);
 
     /// <summary>
@@ -64,6 +73,9 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="targetId">The item to match relationships for</param>
     /// <returns>A list of items matching the search criteria</returns>
     [HttpGet("referencing/{tenantId}/{targetId}")]
-    public Task<IEnumerable<ItemResult>> GetReferencingAsync([FromServices] IItemRelationshipQuery query, string tenantId, string targetId)
+    public Task<IEnumerable<ItemResult>> GetReferencingAsync(
+        [FromServices] IItemRelationshipQuery query, 
+        string tenantId, 
+        string targetId)
         => query.GetReferencingAsync(targetId, tenantId);
 }

@@ -26,7 +26,7 @@ public class ItemTagsController : ControllerBase
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemTagsSetCommand> handler,
         [FromServices] IHttpContextAccessor contextAccessor,
-        ItemTagsSetCommand command)
+        [FromBody] ItemTagsSetCommand command)
     {
         command.Culture = GetCleanCulture(contextAccessor, command.Culture);
         return handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
@@ -43,7 +43,7 @@ public class ItemTagsController : ControllerBase
     public Task<CommandResult> AddAsync(
         [FromServices] ICommandHandler<ItemTagsAddCommand> handler,
         [FromServices] IHttpContextAccessor contextAccessor,
-        ItemTagsAddCommand command)
+        [FromBody] ItemTagsAddCommand command)
     {
         command.Culture = GetCleanCulture(contextAccessor, command.Culture);
         return handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
@@ -60,7 +60,7 @@ public class ItemTagsController : ControllerBase
     public Task<CommandResult> RemoveAsync(
         [FromServices] ICommandHandler<ItemTagsRemoveCommand> handler,
         [FromServices] IHttpContextAccessor contextAccessor,
-        ItemTagsRemoveCommand command)
+        [FromBody] ItemTagsRemoveCommand command)
     {
         command.Culture = GetCleanCulture(contextAccessor, command.Culture);
         return handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
@@ -92,11 +92,11 @@ public class ItemTagsController : ControllerBase
     /// </summary>
     private static string GetCleanCulture(IHttpContextAccessor contextAccessor, string? culture)
     {
-        // Use the explictly specified culture first, then from the header, otherwise default
+        // Use the explicitly specified culture first, then from the header, otherwise default
         var cultureInfo = !string.IsNullOrEmpty(culture) ? new CultureInfo(culture) :
             contextAccessor.HttpContext?.GetCulture() ?? CultureInfo.CurrentCulture;
 
-        // Simplfy to just use neutral language
+        // Simplify to just use neutral language
         return cultureInfo.TwoLetterISOLanguageName;
     }
 }

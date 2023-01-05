@@ -24,7 +24,7 @@ public class ItemMetadataController : ControllerBase
     [HttpPost]
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemMetadataSetCommand> handler,
-        ItemMetadataSetCommand command)
+        [FromBody] ItemMetadataSetCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -34,7 +34,9 @@ public class ItemMetadataController : ControllerBase
     /// <param name="command">The add metadata command</param>
     /// <returns>The command result</returns>
     [HttpPost("add")]
-    public Task<CommandResult> AddAsync([FromServices] ICommandHandler<ItemMetadataAddCommand> handler, ItemMetadataAddCommand command)
+    public Task<CommandResult> AddAsync(
+        [FromServices] ICommandHandler<ItemMetadataAddCommand> handler,
+        [FromBody] ItemMetadataAddCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -44,7 +46,9 @@ public class ItemMetadataController : ControllerBase
     /// <param name="command">The remove metadata command</param>
     /// <returns>The command result</returns>
     [HttpPost("remove")]
-    public Task<CommandResult> RemoveAsync([FromServices] ICommandHandler<ItemMetadataRemoveCommand> handler, ItemMetadataRemoveCommand command)
+    public Task<CommandResult> RemoveAsync(
+        [FromServices] ICommandHandler<ItemMetadataRemoveCommand> handler,
+        [FromBody] ItemMetadataRemoveCommand command)
         => handler.HandleAsync(command, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -55,7 +59,10 @@ public class ItemMetadataController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of metadata on the item</returns>
     [HttpGet("{tenantId}/{id}")]
-    public Task<IEnumerable<MetadataEntry>> GetByIdAsync([FromServices] IItemMetadataQuery query, string tenantId, string id)
+    public Task<IEnumerable<MetadataEntry>> GetByIdAsync(
+        [FromServices] IItemMetadataQuery query, 
+        string tenantId, 
+        string id)
         => query.FetchForIdAsync(id, tenantId);
 
     /// <summary>
