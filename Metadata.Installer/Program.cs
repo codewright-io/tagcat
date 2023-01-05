@@ -1,6 +1,5 @@
 ﻿using System.CommandLine;
 using CodeWright.Common.Asp;
-using CodeWright.Metadata.API;
 using CodeWright.Metadata.API.Events;
 using CodeWright.Metadata.API.Model;
 using CodeWright.Metadata.Installer;

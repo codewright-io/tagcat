@@ -40,6 +40,9 @@ var app = builder.Build();
 // Check that the database have been created
 await app.EnsureDatabaseExistsAsync();
 
+// Add errors
+app.UseExceptionHandler("/error");
+
 // Configure the HTTP request pipeline.
 if (settings.ExposeSwaggerEndpoints)
 {
