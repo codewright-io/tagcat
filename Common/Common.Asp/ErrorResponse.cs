@@ -6,7 +6,7 @@ public class ErrorResponse
 {
     public ErrorResponse() { }
 
-    public ErrorResponse(Exception ex)
+    public ErrorResponse(Exception ex, bool includeStackTrace)
     {
         Type = ex.GetType().Name;
         Message = ex.Message;

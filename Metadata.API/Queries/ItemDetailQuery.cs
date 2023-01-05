@@ -1,4 +1,5 @@
-﻿using CodeWright.Metadata.API.Model;
+﻿using CodeWright.Common.Exceptions;
+using CodeWright.Metadata.API.Model;
 using CodeWright.Metadata.API.Queries.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,8 @@ public class ItemDetailQuery : IItemDetailQuery
     public async Task<ItemResult> GetByIdAsync(string id, string tenantId)
     {
         var results = await GetItemsByIdAsync(new List<string> { id }, tenantId);
+        if (!results.Any())
+            throw new NotFoundException();
         return results.First();
     }
 

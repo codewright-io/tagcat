@@ -1,3 +1,4 @@
+using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
 using CodeWright.Metadata.API.Extensions;
@@ -22,6 +23,8 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="command">The set relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemRelationshipsSetCommand> handler,
         [FromBody] ItemRelationshipsSetCommand command)
@@ -34,6 +37,8 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="command">The add relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost("add")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> AddAsync(
         [FromServices] ICommandHandler<ItemRelationshipsAddCommand> handler,
         [FromBody] ItemRelationshipsAddCommand command)
@@ -46,6 +51,8 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="command">The remove relationships command</param>
     /// <returns>The command result</returns>
     [HttpPost("remove")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> RemoveAsync(
         [FromServices] ICommandHandler<ItemRelationshipsRemoveCommand> handler,
         [FromBody] ItemRelationshipsRemoveCommand command)
@@ -59,6 +66,8 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of relationships on the item</returns>
     [HttpGet("{tenantId}/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     public Task<IEnumerable<RelationshipEntry>> GetByIdAsync(
         [FromServices] IItemRelationshipQuery query, 
         string tenantId, 
@@ -73,6 +82,7 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="targetId">The item to match relationships for</param>
     /// <returns>A list of items matching the search criteria</returns>
     [HttpGet("referencing/{tenantId}/{targetId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> GetReferencingAsync(
         [FromServices] IItemRelationshipQuery query, 
         string tenantId, 

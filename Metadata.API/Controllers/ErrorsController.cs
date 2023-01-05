@@ -22,7 +22,7 @@ public class ErrorsController : ControllerBase
     /// </summary>
     /// <returns>The error response</returns>
     [Route("error")]
-    public ErrorResponse Error()
+    public ErrorResponse Error([FromServices] IWebHostEnvironment env)
     {
         var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
         if (context == null)
@@ -33,9 +33,10 @@ public class ErrorsController : ControllerBase
 
         if (exception is NotFoundException) code = HttpStatusCode.NotFound;
         else if (exception is BadRequestException) code = HttpStatusCode.BadRequest;
+        else if (exception is ArgumentException) code = HttpStatusCode.BadRequest;
 
         Response.StatusCode = (int)code;
 
-        return new ErrorResponse(exception); // Your error model
+        return new ErrorResponse(exception, env.IsDevelopment());
     }
 }

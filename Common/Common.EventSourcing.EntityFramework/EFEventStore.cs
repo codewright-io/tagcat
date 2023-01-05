@@ -20,6 +20,9 @@ public class EFEventStore : IEventStore
 
     public async Task<IEnumerable<IDomainEvent>> GetByIdAsync(string id, string tenantId, long fromVersion, int limit)
     {
+        if (limit <= 0)
+            throw new ArgumentException("Must be greater than zero", nameof(limit));
+
         // Construct an ID-based query 
         var eventQuery = _context.Events.AsNoTracking()
             .Where(ev => ev.Id == id && ev.TenantId == tenantId);

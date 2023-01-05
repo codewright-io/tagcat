@@ -1,4 +1,5 @@
 using System.Globalization;
+using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
 using CodeWright.Metadata.API.Extensions;
@@ -23,6 +24,8 @@ public class ItemTagsController : ControllerBase
     /// <param name="contextAccessor">The HTTP context accessor</param>
     /// <returns>The command result</returns>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemTagsSetCommand> handler,
         [FromServices] IHttpContextAccessor contextAccessor,
@@ -40,6 +43,8 @@ public class ItemTagsController : ControllerBase
     /// <param name="command">The add tags command</param>
     /// <returns>The command result</returns>
     [HttpPost("add")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> AddAsync(
         [FromServices] ICommandHandler<ItemTagsAddCommand> handler,
         [FromServices] IHttpContextAccessor contextAccessor,
@@ -57,6 +62,8 @@ public class ItemTagsController : ControllerBase
     /// <param name="command">The remove tags command</param>
     /// <returns>The command result</returns>
     [HttpPost("remove")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> RemoveAsync(
         [FromServices] ICommandHandler<ItemTagsRemoveCommand> handler,
         [FromServices] IHttpContextAccessor contextAccessor,
@@ -76,6 +83,8 @@ public class ItemTagsController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of relationships on the item</returns>
     [HttpGet("{tenantId}/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     public Task<IEnumerable<ItemTagViewEntry>> GetByIdAsync(
         [FromServices] IItemTagQuery query,
         [FromServices] IHttpContextAccessor contextAccessor,

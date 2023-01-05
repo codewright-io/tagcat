@@ -1,3 +1,4 @@
+using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
 using CodeWright.Metadata.API.Extensions;
@@ -22,6 +23,8 @@ public class ItemMetadataController : ControllerBase
     /// <param name="command">The set metadata command</param>
     /// <returns>The command result</returns>
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemMetadataSetCommand> handler,
         [FromBody] ItemMetadataSetCommand command)
@@ -34,6 +37,8 @@ public class ItemMetadataController : ControllerBase
     /// <param name="command">The add metadata command</param>
     /// <returns>The command result</returns>
     [HttpPost("add")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> AddAsync(
         [FromServices] ICommandHandler<ItemMetadataAddCommand> handler,
         [FromBody] ItemMetadataAddCommand command)
@@ -45,6 +50,8 @@ public class ItemMetadataController : ControllerBase
     /// <param name="handler">The command handler</param>
     /// <param name="command">The remove metadata command</param>
     /// <returns>The command result</returns>
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     [HttpPost("remove")]
     public Task<CommandResult> RemoveAsync(
         [FromServices] ICommandHandler<ItemMetadataRemoveCommand> handler,
@@ -59,6 +66,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of metadata on the item</returns>
     [HttpGet("{tenantId}/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<MetadataEntry>> GetByIdAsync(
         [FromServices] IItemMetadataQuery query, 
         string tenantId, 
@@ -78,6 +86,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items matching the search criteria</returns>
     [HttpGet("search")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> SearchAsync(
         [FromServices] IItemMetadataQuery query,
         [FromQuery] string tenantId,

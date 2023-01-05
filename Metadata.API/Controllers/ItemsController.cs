@@ -1,3 +1,4 @@
+using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
 using CodeWright.Metadata.API.Extensions;
@@ -22,7 +23,7 @@ public class ItemsController : ControllerBase
     /// <returns>The command result</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
         [FromServices] ICommandHandler<ItemSetAllCommand> handler,
         [FromBody] ItemSetAllCommand command)
@@ -36,6 +37,7 @@ public class ItemsController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>The command result</returns>
     [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<CommandResult> DeketeAsync(
         [FromServices] ICommandHandler<ItemRemoveAllCommand> handler,
         string tenantId,
@@ -50,6 +52,8 @@ public class ItemsController : ControllerBase
     /// <param name="id">The ID of the item</param>
     /// <returns>The item details</returns>
     [HttpGet("{tenantId}/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     public Task<ItemResult> GetByIdAsync(
         [FromServices] IItemDetailQuery query, 
         string tenantId,
@@ -66,6 +70,8 @@ public class ItemsController : ControllerBase
     /// <param name="limit">The maximum number of events to fetch</param>
     /// <returns>The item events</returns>
     [HttpGet("events/{tenantId}/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<IEnumerable<IDomainEvent>> GetEventsByIdAsync(
         [FromServices] IEventStore eventStore,
         string tenantId,
