@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
@@ -40,8 +41,8 @@ public class ItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<CommandResult> DeketeAsync(
         [FromServices] ICommandHandler<ItemRemoveAllCommand> handler,
-        string tenantId,
-        string id)
+        [Required] string tenantId,
+        [Required] string id)
         => handler.HandleAsync(new ItemRemoveAllCommand {TenantId = tenantId, Id = id }, HttpContext.GetUserId() ?? "");
 
     /// <summary>
@@ -77,6 +78,6 @@ public class ItemsController : ControllerBase
         string tenantId,
         string id,
         [FromQuery] long? fromVersion = null,
-        [FromQuery] int limit = 20)
+        [FromQuery, Range(1, int.MaxValue)] int limit = 20)
         => eventStore.GetByIdAsync(id, tenantId, fromVersion ?? -1, limit);
 }

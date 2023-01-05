@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
@@ -85,16 +86,16 @@ public class ItemMetadataController : ControllerBase
     /// <param name="limit">The maximum number of results to return</param>
     /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items matching the search criteria</returns>
-    [HttpGet("search")]
+    [HttpGet("search/{tenantId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> SearchAsync(
         [FromServices] IItemMetadataQuery query,
-        [FromQuery] string tenantId,
-        [FromQuery] string name,
-        [FromQuery] string value,
+        string tenantId,
+        [FromQuery, Required] string name,
+        [FromQuery, Required] string value,
         [FromQuery] string? secondaryName = null,
         [FromQuery] string? secondaryValue = null,
-        [FromQuery] int limit = 20,
-        [FromQuery] int offset = 0)
+        [FromQuery, Range(1, int.MaxValue)] int limit = 20,
+        [FromQuery, Range(0, int.MaxValue)] int offset = 0)
         => query.GetItemsByMetadataAsync(tenantId, name, value, secondaryName, secondaryValue, limit, offset);
 }
