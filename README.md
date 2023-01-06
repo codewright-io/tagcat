@@ -5,6 +5,7 @@ A service for tagging, labeling, and attaching metadata to objects inside your a
 
   ![Build Status](https://github.com/codewright-io/tagcat/actions/workflows/dotnet.yml/badge.svg?branch=main)
   ![Docker Status](https://github.com/codewright-io/tagcat/actions/workflows/docker-image.yml/badge.svg?branch=main)
+  ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/EugeneScully/7b5a559351b80a526c2e401b5b3a4115/raw/code-coverage.json)
 </div>
 
 ## Concepts
