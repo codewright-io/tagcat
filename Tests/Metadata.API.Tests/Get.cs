@@ -19,9 +19,9 @@ namespace CodeWright.Metadata.API.Tests
         public static string ItemEvents(string tenantId, string id, int limit) => $"api/items/v1/events/{tenantId}/{id}?limit={limit}";
 
         public static string SearchMetadata(string tenantId, string name, string value, string secondaryName, string secondaryValue, int limit, int offset) 
-            => $"api/items/metadata/v1/search?tenantId={tenantId}&name={name}&value={value}&secondaryName={secondaryName}&secondaryValue={secondaryValue}&limit={limit}&offset={offset}";
+            => $"api/items/metadata/v1/search/{tenantId}?name={name}&value={value}&secondaryName={secondaryName}&secondaryValue={secondaryValue}&limit={limit}&offset={offset}";
 
         public static string SearchMetadata(string tenantId, string name, string value, int limit, int offset)
-            => $"api/items/metadata/v1/search?tenantId={tenantId}&name={name}&value={value}&limit={limit}&offset={offset}";
+            => $"api/items/metadata/v1/search/{tenantId}?name={name}&value={value}&limit={limit}&offset={offset}";
     }
 }
