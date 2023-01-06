@@ -2,26 +2,26 @@
 using CodeWright.Metadata.API.Queries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace CodeWright.Metadata.API.Tests
 {
-    internal class TestMetadataServer : WebApplicationFactory<Program>
+    internal class TestMetadataServer : WebApplicationFactory<Program>, IAsyncDisposable
     {
         private readonly string _eventDbFile;
         private readonly string _viewDbFile;
+        private bool _deletedDatabases = false;
 
         public TestMetadataServer()
         {
-            // TODO: Need to cleanup after previous test runs
-            // DeletePreviousDatabaseFiles();
-            _eventDbFile = copyDatabase("meta");
-            _viewDbFile = copyDatabase("view");
+            // Create some new database files to run the tests with
+            _eventDbFile = CopyDatabase("meta");
+            _viewDbFile = CopyDatabase("view");
         }
 
-        private static string copyDatabase(string database)
+        private static string CopyDatabase(string database)
         {
             // Note: You need to have run the installer first to create the database
             var databaseFile = new FileInfo($"../../../../../Metadata.Installer/{database}.db");
@@ -31,18 +31,13 @@ namespace CodeWright.Metadata.API.Tests
             return outputFile;
         }
 
-        private static void DeletePreviousDatabaseFiles()
+        public void DeleteDatabases()
         {
-            // Delete database, plus any write ahead and temporary files that it produces
-            // Note: If you don't delete the temp files, then it retains information from aborted tests
+            if (_deletedDatabases) return;
 
-            var dir = new DirectoryInfo(Environment.CurrentDirectory);
-            var databaseFiles = dir.EnumerateFiles("*.db*");
-
-            foreach (var file in databaseFiles)
-            {
-                file.Delete();
-            }
+            File.Delete(_eventDbFile);
+            File.Delete(_viewDbFile);
+            _deletedDatabases = true;
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -60,5 +55,15 @@ namespace CodeWright.Metadata.API.Tests
 
             return base.CreateHost(builder);
         }
+
+        //public override async ValueTask DisposeAsync()
+        //{
+        //    var result = base.DisposeAsync();
+
+        //    await Task.Delay(2000);
+        //    DeleteDatabases();
+
+        //    return;
+        //}
     }
 }
