@@ -15,4 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file ./Metadata.API/Dockerfile -t tagcat:latest
+      run: | 
+        docker build . --file ./Metadata.API/Dockerfile -t codewrightio/tagcat:latest
+        docker build . --file ./Metadata.Installer/Dockerfile -t codewrightio/tagcat-install:latest
