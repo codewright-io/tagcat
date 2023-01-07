@@ -98,7 +98,7 @@ Instead it should only process requests from other services in your environment.
 
 To run a simple example installation, pull and run the docker image with this command:
 ```
-docker run codewrightio/tagcat:latest -p 80:5037
+docker run -p 5551:5551  -e EXPOSE_SWAGGER=true codewrightio/tagcat:latest
 ```
 
 Then navigate to http://localhost:5037/swagger/index.html to view the swagger interface.
@@ -112,9 +112,11 @@ The following environment variables are supported:
 DATABASE={SQLite (Default),MicrosoftSQL,PostgreSQL,MySQL,InMemory}
 DATABASE_CONNECTION={Connection string for the event store database}
 DATABASE_VIEW_CONNECTION={Connection string for the view database}
+EXPOSE_SWAGGER={true|false (default)} to expose the swagger interface
+SERVICE_ID={uuid} to set a static service identifier used to log changes
 ```
 
 To initialize a database run the following command:
 ```
-docker run codewrightio/tagcat-install:latest -e DATABASE=SQLite
+docker run -e DATABASE=SQLite codewrightio/tagcat-install:latest
 ```
