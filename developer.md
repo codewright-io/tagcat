@@ -48,7 +48,9 @@ Deployment Tasks:
 Documentation Tasks:
 - README includes how to run, install
 - Document tag and localization example process
-- Review & cleanup swagger file - Add redoc deployment
+- Review & cleanup swagger file
+  - Add examples for each API
+  - Add redoc deployment?
 - Website?
 - Licensing - Dual-licensing?
 
@@ -61,4 +63,4 @@ Development Tasks:
 
 ## TODO For Later
 
-- Consider configurable length for ID columns
+- Consider configurable length for ID columns. Maybe not worth it?
