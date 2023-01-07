@@ -11,12 +11,14 @@ public abstract class ItemCommandBase : IDomainCommand
     /// <summary>
     /// Unique identifier for the object
     /// </summary>
+    /// <example>A_Midsummer_Nights_Dream</example>
     [Required, StringLength(Identifiers.MaximumLength)]
     public string Id { get; init; } = string.Empty;
 
     /// <summary>
     /// Tenant Id for the object
     /// </summary>
+    /// <example>William_Shakespeare</example>
     [Required, StringLength(Identifiers.MaximumLength)]
     public string TenantId { get; init; } = string.Empty;
 }

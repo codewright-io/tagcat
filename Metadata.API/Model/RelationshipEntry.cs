@@ -10,11 +10,13 @@ public class RelationshipEntry : IEquatable<RelationshipEntry>
     /// <summary>
     /// The type of relationship
     /// </summary>
+    /// <example>Tag</example>
     public RelationshipType Type { get; init; }
 
     /// <summary>
     /// The target ID of the relationship
     /// </summary>
+    /// <example>Comedy</example>
     [Required]
     public string TargetId { get; init; } = string.Empty;
 

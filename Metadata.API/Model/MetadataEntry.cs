@@ -10,12 +10,14 @@ namespace CodeWright.Metadata.API.Model
         /// <summary>
         /// The name or key for the metadata information
         /// </summary>
+        /// <example>Year</example>
         [Required]
         public string Name { get; init; } = string.Empty;
 
         /// <summary>
         /// The value of the metadata information
         /// </summary>
+        /// <example>1596</example>
         public string Value { get; init; } = string.Empty;
 
         #region IEquatable
