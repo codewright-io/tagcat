@@ -30,7 +30,7 @@ if (settings.ExposeSwaggerEndpoints)
             title: "Tagcat",
             version: "v1",
             description: !string.IsNullOrEmpty(descriptionPath) && File.Exists(descriptionPath) ?
-                File.ReadAllText(descriptionPath) : "",
+                File.ReadAllText(descriptionPath) : "Tagcat Description",
             logoUrl: new Uri("https://raw.githubusercontent.com/codewright-io/tagcat/main/tagcat_sml.png"),
             contactName: "Code Wright",
             contactUrl: new Uri("https://codewright.io/"),
