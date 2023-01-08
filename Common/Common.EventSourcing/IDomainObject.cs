@@ -1,5 +1,8 @@
 ﻿namespace CodeWright.Common.EventSourcing;
 
+/// <summary>
+/// Interface for all domain objects
+/// </summary>
 public interface IDomainObject
 {
     /// <summary>

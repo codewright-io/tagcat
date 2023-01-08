@@ -14,6 +14,9 @@ public class SnapshotDomainObjectRepository<T, TFactory> : IDomainRepository<T>
     private readonly IEventBus _eventBus;
     private readonly int _snapshotInterval;
 
+    /// <summary>
+    /// Create an instance of a SnapshotDomainObjectRepository
+    /// </summary>
     public SnapshotDomainObjectRepository(
         ISnapshotRepository<T> snapshotStore, 
         IEventStore eventStore,
@@ -29,6 +32,7 @@ public class SnapshotDomainObjectRepository<T, TFactory> : IDomainRepository<T>
         _snapshotInterval = snapshotInterval;
     }
 
+    /// <inheritdoc/>
     public async Task<T?> GetByIdAsync(string id, string tenantId)
     {
         // Get the snapshot
@@ -51,11 +55,7 @@ public class SnapshotDomainObjectRepository<T, TFactory> : IDomainRepository<T>
         return item;
     }
 
-    /// <summary>
-    /// Save the domain entity
-    /// </summary>
-    /// <param name="item">The domain object to save</param>
-    /// <param name="userId">The user the made the changes</param>
+    /// <inheritdoc/>
     public async Task SaveAsync(T item, string userId)
     {
         var domainEvents = item.StopQueuing();

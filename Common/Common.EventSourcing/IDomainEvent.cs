@@ -1,5 +1,8 @@
 ﻿namespace CodeWright.Common.EventSourcing;
 
+/// <summary>
+/// Interface for domain events
+/// </summary>
 public interface IDomainEvent
 {
     /// <summary> identifier for the object (unique within the tenancy) </summary>

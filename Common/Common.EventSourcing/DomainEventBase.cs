@@ -1,5 +1,8 @@
 ﻿namespace CodeWright.Common.EventSourcing;
 
+/// <summary>
+/// Optional base class for domain events
+/// </summary>
 public abstract class DomainEventBase : IDomainEvent
 {
     /// <inheritdoc />

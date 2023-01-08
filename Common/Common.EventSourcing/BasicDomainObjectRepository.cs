@@ -12,6 +12,9 @@ public class BasicDomainObjectRepository<T, TFactory> : IDomainRepository<T>
     private readonly IEventStore _eventStore;
     private readonly IEventBus _eventBus;
 
+    /// <summary>
+    /// Create an instance of a BasicDomainObjectRepository
+    /// </summary>
     public BasicDomainObjectRepository(IEventStore eventStore, IEventBus eventBus)
     {
         _eventStore = eventStore;

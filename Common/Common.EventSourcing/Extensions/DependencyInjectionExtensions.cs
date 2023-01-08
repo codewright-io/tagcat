@@ -5,8 +5,14 @@ using CodeWright.Common.EventSourcing.Snapshots;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
+/// <summary>
+/// Dependency injection extensions
+/// </summary>
 public static class DependencyInjectionExtensions
 {
+    /// <summary>
+    /// Register event sourcing services
+    /// </summary>
     public static IServiceCollection AddEventSourcing(this IServiceCollection services)
     {
         // Add support for ID generation

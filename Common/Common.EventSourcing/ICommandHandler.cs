@@ -7,5 +7,11 @@
 public interface ICommandHandler<TCommand> 
     where TCommand : IDomainCommand, new()
 {
+    /// <summary>
+    /// Process the command
+    /// </summary>
+    /// <param name="command">The command to process</param>
+    /// <param name="userId">The user that is processing the command</param>
+    /// <returns>The result</returns>
     Task<CommandResult> HandleAsync(TCommand command, string userId);
 }

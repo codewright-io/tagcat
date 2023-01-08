@@ -1,5 +1,8 @@
 ﻿namespace CodeWright.Common.EventSourcing
 {
+    /// <summary>
+    /// Optional base class for domain objects
+    /// </summary>
     public abstract class DomainObjectBase : IDomainObject
     {
         /// <summary>
@@ -23,6 +26,10 @@
         private readonly List<IDomainEvent> _eventQueue = new List<IDomainEvent>();
         private bool _queuing;
 
+        /// <summary>
+        /// Queue a newly created domain event
+        /// </summary>
+        /// <param name="ev">The event to queue</param>
         public void QueueEvent(IDomainEvent ev)
         {
             if (_queuing)
@@ -43,7 +50,7 @@
         }
 
         /// <summary>
-        /// Stop queueing events and fetch the current list.
+        /// Stop queuing events and fetch the current list.
         /// </summary>
         public IEnumerable<IDomainEvent> StopQueuing()
         {

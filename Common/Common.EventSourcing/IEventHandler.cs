@@ -9,5 +9,10 @@ public interface IEventHandler<TEvent>
 #pragma warning restore CA1711 // Identifiers should not have incorrect suffix
     where TEvent : IDomainEvent, new()
 {
+    /// <summary>
+    /// Process the event
+    /// </summary>
+    /// <param name="ev"></param>
+    /// <returns></returns>
     Task HandleAsync(TEvent ev);
 }

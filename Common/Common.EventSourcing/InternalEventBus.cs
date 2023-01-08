@@ -11,15 +11,20 @@ public class InternalEventBus : IEventBus
 {
     private readonly IServiceProvider _serviceProvider;
 
-    // Cache of refected event handler methods.
+    // Cache of reflected event handler methods.
     // Can be a null entry if no handler for that method.
     private static ConcurrentDictionary<Type, MethodInfo?> _methodLookup = new();
 
+    /// <summary>
+    /// Create an instance of a InternalEventBus
+    /// </summary>
+    /// <param name="serviceProvider"></param>
     public InternalEventBus(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
 
+    /// <inheritdoc/>
     public async Task SendAsync(IEnumerable<IDomainEvent> events)
     {
         foreach (var ev in events)
