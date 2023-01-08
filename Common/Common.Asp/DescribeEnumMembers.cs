@@ -28,15 +28,15 @@ public class DescribeEnumMembers : ISchemaFilter
     /// <summary>
     /// Apply this schema filter.
     /// </summary>
-    /// <param name="argSchema">Target schema object.</param>
-    /// <param name="argContext">Schema filter context.</param>
-    public void Apply(OpenApiSchema argSchema, SchemaFilterContext argContext)
+    /// <param name="schema">Target schema object.</param>
+    /// <param name="context">Schema filter context.</param>
+    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
     {
-        var EnumType = argContext.Type;
+        var EnumType = context.Type;
 
         if (!EnumType.IsEnum) return;
 
-        var sb = new StringBuilder(argSchema.Description);
+        var sb = new StringBuilder(schema.Description);
 
         sb.AppendLine("<p>Possible values:</p>");
         sb.AppendLine("<ul>");
@@ -51,11 +51,11 @@ public class DescribeEnumMembers : ISchemaFilter
 
             if (string.IsNullOrEmpty(EnumMemberDescription)) continue;
 
-            sb.AppendLine($"<li><b>{EnumMemberName}</b>: {EnumMemberDescription}</li>");
+            sb.AppendLine(FormattableString.Invariant($"<li><b>{EnumMemberName}</b>: {EnumMemberDescription}</li>"));
         }
 
         sb.AppendLine("</ul>");
 
-        argSchema.Description = sb.ToString();
+        schema.Description = sb.ToString();
     }
 }

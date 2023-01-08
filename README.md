@@ -10,6 +10,8 @@ A service for tagging, labeling, and attaching metadata to objects inside your a
 
 ## Concepts
 
+**Note**: This project has not been released yet. Please do not use in production deployments.
+
 This service is intended to provide a light-weight, scalable service to store metadata and tag information about objects inside your application.
 
 It supports storing three types of information about objects or items in a system:
