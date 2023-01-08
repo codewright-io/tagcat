@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using CodeWright.Common.Asp;
+using CodeWright.Common.EventSourcing;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ if (settings.ExposeSwaggerEndpoints)
     {
         string descriptionPath = Path.Combine(Environment.CurrentDirectory, "../openapi.md");
         options.AddXmlDocument();
+        //options.AddXmlDocument(typeof(CommandResult).Assembly);
         options.IncludeDocumentInformation(
             title: "Tagcat",
             version: "v1",
