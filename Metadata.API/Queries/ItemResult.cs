@@ -13,18 +13,21 @@ public class ItemResult
     /// <summary>
     /// Unique identifier for the object
     /// </summary>
+    /// <example>A_Midsummer_Nights_Dream</example>
     [Required]
     public string Id { get; init; } = string.Empty;
 
     /// <summary>
     /// Tenant Id for the object
     /// </summary>
+    /// <example>William_Shakespeare</example>
     [Required]
     public string TenantId { get; init; } = string.Empty;
 
     /// <summary>
     /// Version of the object
     /// </summary>
+    /// <example>123456</example>
     [Required]
     public long Version { get; init; }
 

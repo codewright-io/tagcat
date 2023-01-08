@@ -38,6 +38,20 @@ dotnet ef migrations add InitialCreate
       I think that it needs its own migrations builder project.
 
 
+## Spectacle Documentation
+
+To generate spectacle documents:
+```
+docker run -it --mount src="$(pwd)",target=/tagcat,type=bind sourcey/spectacle /bin/sh
+```
+
+Then from inside the container
+```
+spectacle /tagcat/swagger.json
+```
+
+The public folder will contain the documents
+
 
 ## TODO Before v1
 
