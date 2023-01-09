@@ -32,7 +32,8 @@ public class ItemRelationshipQuery : IItemRelationshipQuery
     }
 
     /// <inheritdoc/>
-    public async Task<IEnumerable<string>> GetReferencingIdsAsync(string targetId, string tenantId)
+    public async Task<IEnumerable<string>> GetReferencingIdsAsync(
+        string targetId, string tenantId, int limit, int offset)
     {
         var matchIds = await _context.Relationships.AsNoTracking()
             .Where(m => m.TargetId == targetId && m.TenantId == tenantId)
@@ -44,9 +45,9 @@ public class ItemRelationshipQuery : IItemRelationshipQuery
     }
 
     /// <inheritdoc/>
-    public async Task<IEnumerable<ItemResult>> GetReferencingAsync(string targetId, string tenantId)
+    public async Task<IEnumerable<ItemResult>> GetReferencingAsync(string targetId, string tenantId, int limit, int offset)
     {
-        var itemIds = await GetReferencingIdsAsync(targetId, tenantId);
+        var itemIds = await GetReferencingIdsAsync(targetId, tenantId, limit, offset);
 
         // Convert to results
         var results = await _detailQuery.GetItemsByIdAsync(itemIds, tenantId);

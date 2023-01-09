@@ -15,10 +15,10 @@ public interface IItemRelationshipQuery
     /// <summary>
     /// Get items that relationship an item and return their IDs
     /// </summary>
-    Task<IEnumerable<string>> GetReferencingIdsAsync(string targetId, string tenantId);
+    Task<IEnumerable<string>> GetReferencingIdsAsync(string targetId, string tenantId, int limit, int offset);
 
     /// <summary>
     /// Get items that relationship an item
     /// </summary>
-    Task<IEnumerable<ItemResult>> GetReferencingAsync(string targetId, string tenantId);
+    Task<IEnumerable<ItemResult>> GetReferencingAsync(string targetId, string tenantId, int limit, int offset);
 }

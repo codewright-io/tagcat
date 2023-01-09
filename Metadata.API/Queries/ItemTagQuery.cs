@@ -11,13 +11,17 @@ namespace CodeWright.Metadata.API.Queries;
 public class ItemTagQuery : IItemTagQuery
 {
     private readonly MetadataDbContext _context;
+    private readonly IItemMetadataQuery _metadataQuery;
+    private readonly IItemRelationshipQuery _relationshipQuery;
 
     /// <summary>
     /// Create an instance of a ItemTagQuery
     /// </summary>
-    public ItemTagQuery(MetadataDbContext context)
+    public ItemTagQuery(MetadataDbContext context, IItemMetadataQuery metadataQuery, IItemRelationshipQuery relationshipQuery)
     {
         _context = context;
+        _metadataQuery = metadataQuery;
+        _relationshipQuery = relationshipQuery;
     }
 
     /// <inheritdoc/>
@@ -28,7 +32,7 @@ public class ItemTagQuery : IItemTagQuery
             .Where(item => item.Id == id)
             .Where(item => item.TenantId == tenantId)
             .Where(item => item.Type == RelationshipType.Tag)
-            .Join(_context.Metadata.AsNoTracking(), item => item.TargetId, tagMetadata => tagMetadata.Id, 
+            .Join(_context.Metadata.AsNoTracking(), item => item.TargetId, tagMetadata => tagMetadata.Id,
                 (item, tagMetadata) => new { item, tagMetadata })
             .ToListAsync();
 
@@ -39,10 +43,32 @@ public class ItemTagQuery : IItemTagQuery
             .Where(result => result.tagMetadata?.Name == MetadataNames.Name)
             .ToList();
 
-        return matches.Select(m => new ItemTagViewEntry 
-        { 
-            Id = m.tagMetadata.Id, 
+        return matches.Select(m => new ItemTagViewEntry
+        {
+            Id = m.tagMetadata.Id,
             DisplayName = m.tagMetadata.Value
         });
+    }
+
+    /// <inheritdoc/>
+    public async Task<IEnumerable<ItemResult>> GetItemsByTagAsync(
+        string tenantId,
+        string tag,
+        string culture,
+        int limit,
+        int offset)
+    {
+        // First fetch the tag
+        var tagIdMatches = await _metadataQuery.GetItemIdsByMetadataAsync(
+            tenantId, MetadataNames.Name, tag, MetadataNames.Culture, culture, 1, 0);
+
+        var tagId = tagIdMatches.FirstOrDefault();
+        if (tagId == null)
+            return Enumerable.Empty<ItemResult>();
+
+        // Return items referencing this tag
+        var matches = await _relationshipQuery.GetReferencingAsync(tagId, tenantId, limit, offset);
+
+        return matches;
     }
 }

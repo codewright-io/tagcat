@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
@@ -80,12 +81,16 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="query">The query handler</param>
     /// <param name="tenantId">The ID of the tenant to search</param>
     /// <param name="targetId">The item to match relationships for</param>
+    /// <param name="limit">The maximum number of results to return</param>
+    /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items matching the search criteria</returns>
     [HttpGet("referencing/{tenantId}/{targetId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> GetReferencingAsync(
         [FromServices] IItemRelationshipQuery query, 
         string tenantId, 
-        string targetId)
-        => query.GetReferencingAsync(targetId, tenantId);
+        string targetId,
+        [FromQuery, Range(1, int.MaxValue)] int limit = 20,
+        [FromQuery, Range(0, int.MaxValue)] int offset = 0)
+        => query.GetReferencingAsync(targetId, tenantId, limit, offset);
 }

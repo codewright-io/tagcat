@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using CodeWright.Metadata.API.Commands;
+using CodeWright.Metadata.API.Queries;
 using CodeWright.Metadata.API.Queries.Views;
 using FluentAssertions;
 
@@ -89,5 +90,8 @@ public class TagTests
             new ItemTagViewEntry { DisplayName = "Pink" },
             new ItemTagViewEntry { DisplayName = "Chaotic" },
         }, options => options.Excluding(p => p.Id));
+
+        var searchResult = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemsByTag("tenant", "Pink"));
+        searchResult.Single().Should().BeEquivalentTo(setCommand, options => options.ExcludingMissingMembers());
     }
 }   

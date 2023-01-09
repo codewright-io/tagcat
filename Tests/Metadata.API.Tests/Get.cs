@@ -16,6 +16,8 @@ namespace CodeWright.Metadata.API.Tests
 
         public static string ItemTags(string tenantId, string id) => $"api/items/tags/v1/{tenantId}/{id}";
 
+        public static string ItemsByTag(string tenantId, string tag) => $"api/items/tags/v1/search/{tenantId}?tag={tag}";
+
         public static string ItemEvents(string tenantId, string id, int limit) => $"api/items/v1/events/{tenantId}/{id}?limit={limit}";
 
         public static string SearchMetadata(string tenantId, string name, string value, string secondaryName, string secondaryValue, int limit, int offset) 

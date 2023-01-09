@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
 using CodeWright.Metadata.API.Extensions;
+using CodeWright.Metadata.API.Queries;
 using CodeWright.Metadata.API.Queries.Interfaces;
 using CodeWright.Metadata.API.Queries.Views;
 using Microsoft.AspNetCore.Mvc;
@@ -92,6 +94,29 @@ public class ItemTagsController : ControllerBase
         string tenantId, 
         string id)
         => query.FetchForIdAsync(id, tenantId, GetCleanCulture(contextAccessor, culture));
+
+    /// <summary>
+    /// Fetch the items with a matching tag
+    /// </summary>
+    /// <param name="query">The query handler</param>
+    /// <param name="contextAccessor">The HTTP context accessor</param>
+    /// <param name="culture">An optional two letter ISO culture to fetch the tags for</param>
+    /// <param name="tenantId">The tenant ID for the item</param>
+    /// <param name="tag">The tag to search for</param>
+    /// <param name="limit">The maximum number of results to return</param>
+    /// <param name="offset">An offset used to paginate results</param>
+    /// <returns>A list of items with the matching tag</returns>
+    [HttpGet("search/{tenantId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public Task<IEnumerable<ItemResult>> GetItemsByTagAsync(
+        [FromServices] IItemTagQuery query,
+        [FromServices] IHttpContextAccessor contextAccessor,
+        string tenantId,
+        [FromQuery] string? culture,
+        [FromQuery] string tag,
+        [FromQuery, Range(1, int.MaxValue)] int limit = 20,
+        [FromQuery, Range(0, int.MaxValue)] int offset = 0)
+        => query.GetItemsByTagAsync(tenantId, tag, GetCleanCulture(contextAccessor, culture), limit, offset);
 
     /// <summary>
     /// Get two letter ISO culture based on the following priorities:

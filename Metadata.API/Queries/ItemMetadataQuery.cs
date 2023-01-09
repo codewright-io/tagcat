@@ -59,7 +59,7 @@ public class ItemMetadataQuery : IItemMetadataQuery
                 m => m, m => m.Id, (m1, m2) => m1);
         }
 
-        // Seanch on the primary name and value first, join with all metadata and search on the secondary query if applicable
+        // Search on the primary name and value first, join with all metadata and search on the secondary query if applicable
         var itemIds = await idQuery
             .Skip(offset)
             .Take(limit)

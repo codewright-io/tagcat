@@ -63,13 +63,13 @@ Documentation Tasks:
 - README includes how to run, install
 - Document tag and localization example process
 - Review & cleanup swagger file
-  - Add examples for each API
   - Add redoc deployment?
 - Website?
 - Licensing - Dual-licensing?
 
 Development Tasks:
-- Work out scaling
+- Scaling:
+  - Cross region synchronization process
 - Add API to search items by tags and types
 - Do we want to include aliased tags, subcategory tags in tag search results? Or add a search parameter?
 - Search on time ranges, number ranges for metadata search?
