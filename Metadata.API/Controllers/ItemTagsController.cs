@@ -4,6 +4,7 @@ using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
 using CodeWright.Metadata.API.Extensions;
+using CodeWright.Metadata.API.Model;
 using CodeWright.Metadata.API.Queries;
 using CodeWright.Metadata.API.Queries.Interfaces;
 using CodeWright.Metadata.API.Queries.Views;
@@ -118,7 +119,8 @@ public class ItemTagsController : ControllerBase
         [FromQuery] string? type,
         [FromQuery, Range(1, int.MaxValue)] int limit = 20,
         [FromQuery, Range(0, int.MaxValue)] int offset = 0)
-        => query.GetItemsByTagAsync(tenantId, tag, GetCleanCulture(contextAccessor, culture), type, limit, offset);
+        => query.GetItemsByTagAsync(
+            tenantId, tag, GetCleanCulture(contextAccessor, culture), MetadataNames.Type, type, limit, offset);
 
     /// <summary>
     /// Get two letter ISO culture based on the following priorities:

@@ -61,7 +61,8 @@ public class ItemTagQuery : IItemTagQuery
         string tenantId,
         string tag,
         string culture,
-        string? type,
+        string? metadataName,
+        string? metadataValue,
         int limit,
         int offset)
     {
@@ -74,8 +75,8 @@ public class ItemTagQuery : IItemTagQuery
             return Enumerable.Empty<ItemResult>();
 
         // Return items referencing this tag
-        var matches = !string.IsNullOrEmpty(type) ? 
-            await GetItemsByMetadataAndReferenceAsync(tenantId, tagId, MetadataNames.Type, type, limit, offset) :
+        var matches = !string.IsNullOrEmpty(metadataName) && !string.IsNullOrEmpty(metadataValue) ? 
+            await GetItemsByMetadataAndReferenceAsync(tenantId, tagId, metadataName, metadataValue, limit, offset) :
             await _relationshipQuery.GetReferencingAsync(tagId, tenantId, limit, offset);
 
         return matches;

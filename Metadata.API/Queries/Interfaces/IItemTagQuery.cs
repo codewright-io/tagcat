@@ -18,7 +18,8 @@ public interface IItemTagQuery
     /// <param name="tenantId"></param>
     /// <param name="tag"></param>
     /// <param name="culture"></param>
-    /// <param name="type">An optional type to filter on</param>
+    /// <param name="metadataName">An optional metadata name to match</param>
+    /// <param name="metadataValue">An optional metadata value to match</param>
     /// <param name="limit"></param>
     /// <param name="offset"></param>
     /// <returns></returns>
@@ -26,7 +27,8 @@ public interface IItemTagQuery
         string tenantId,
         string tag,
         string culture,
-        string? type,
+        string? metadataName,
+        string? metadataValue,
         int limit,
         int offset);
 }
