@@ -102,7 +102,8 @@ public class ItemTagsController : ControllerBase
     /// <param name="contextAccessor">The HTTP context accessor</param>
     /// <param name="culture">An optional two letter ISO culture to fetch the tags for</param>
     /// <param name="tenantId">The tenant ID for the item</param>
-    /// <param name="tag">The tag to search for</param>
+    /// <param name="tag">The tag to search for</param>>
+    /// <param name="type">An optional type to filter on</param>
     /// <param name="limit">The maximum number of results to return</param>
     /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items with the matching tag</returns>
@@ -114,9 +115,10 @@ public class ItemTagsController : ControllerBase
         string tenantId,
         [FromQuery] string? culture,
         [FromQuery] string tag,
+        [FromQuery] string? type,
         [FromQuery, Range(1, int.MaxValue)] int limit = 20,
         [FromQuery, Range(0, int.MaxValue)] int offset = 0)
-        => query.GetItemsByTagAsync(tenantId, tag, GetCleanCulture(contextAccessor, culture), limit, offset);
+        => query.GetItemsByTagAsync(tenantId, tag, GetCleanCulture(contextAccessor, culture), type, limit, offset);
 
     /// <summary>
     /// Get two letter ISO culture based on the following priorities:

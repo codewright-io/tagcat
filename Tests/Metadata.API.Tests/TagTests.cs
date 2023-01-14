@@ -92,6 +92,7 @@ public class TagTests
         }, options => options.Excluding(p => p.Id));
 
         var searchResult = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemsByTag("tenant", "Pink"));
+        Assert.NotNull(searchResult);
         searchResult.Single().Should().BeEquivalentTo(setCommand, options => options.ExcludingMissingMembers());
     }
 }   

@@ -13,15 +13,21 @@ public class ItemTagQuery : IItemTagQuery
     private readonly MetadataDbContext _context;
     private readonly IItemMetadataQuery _metadataQuery;
     private readonly IItemRelationshipQuery _relationshipQuery;
+    private readonly IItemDetailQuery _detailQuery;
 
     /// <summary>
     /// Create an instance of a ItemTagQuery
     /// </summary>
-    public ItemTagQuery(MetadataDbContext context, IItemMetadataQuery metadataQuery, IItemRelationshipQuery relationshipQuery)
+    public ItemTagQuery(
+        MetadataDbContext context, 
+        IItemMetadataQuery metadataQuery, 
+        IItemRelationshipQuery relationshipQuery,
+        IItemDetailQuery detailQuery)
     {
         _context = context;
         _metadataQuery = metadataQuery;
         _relationshipQuery = relationshipQuery;
+        _detailQuery = detailQuery;
     }
 
     /// <inheritdoc/>
@@ -55,6 +61,7 @@ public class ItemTagQuery : IItemTagQuery
         string tenantId,
         string tag,
         string culture,
+        string? type,
         int limit,
         int offset)
     {
@@ -67,8 +74,36 @@ public class ItemTagQuery : IItemTagQuery
             return Enumerable.Empty<ItemResult>();
 
         // Return items referencing this tag
-        var matches = await _relationshipQuery.GetReferencingAsync(tagId, tenantId, limit, offset);
+        var matches = !string.IsNullOrEmpty(type) ? 
+            await GetItemsByMetadataAndReferenceAsync(tenantId, tagId, MetadataNames.Type, type, limit, offset) :
+            await _relationshipQuery.GetReferencingAsync(tagId, tenantId, limit, offset);
 
         return matches;
+    }
+
+    private async Task<IEnumerable<ItemResult>> GetItemsByMetadataAndReferenceAsync(
+        string tenantId,
+        string targetId,
+        string name,
+        string value,
+        int limit,
+        int offset)
+    {
+        var resultIds = await _context.Relationships.AsNoTracking()
+            .Where(r => r.TenantId == tenantId)
+            .Where(r => r.TargetId == targetId)
+            .Join(
+                _context.Metadata.AsNoTracking()
+                    .Where(m => m.TenantId == tenantId)
+                    .Where(m => m.Value == value)
+                    .Where(m => m.Name == name)
+            , r => r.Id, m => m.Id, (r, m) => r.Id)
+            .Take(limit)
+            .Skip(offset)
+            .ToListAsync();
+
+        var results = await _detailQuery.GetItemsByIdAsync(resultIds, tenantId);
+
+        return results;
     }
 }
