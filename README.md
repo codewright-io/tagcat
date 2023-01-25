@@ -100,10 +100,10 @@ Instead it should only process requests from other services in your environment.
 
 To run a simple example installation, pull and run the docker image with this command:
 ```
-docker run -p 5551:5551  -e EXPOSE_SWAGGER=true codewrightio/tagcat:latest
+docker run -it --rm -d -p 5551:5551 -e EXPOSE_SWAGGER=true codewrightio/tagcat:latest
 ```
 
-Then navigate to http://localhost:5037/swagger/index.html to view the swagger interface.
+Then navigate to http://localhost:5551/swagger/index.html to view the swagger interface.
 
 This will run the container using a file based SQLite database, so by default data will not persist unless you mount the .db files as volume bind mounts.
 

@@ -53,6 +53,20 @@ spectacle /tagcat/swagger.json
 The public folder will contain the documents
 
 
+## Docker Build
+
+To build the docker container:
+
+```
+docker build . -f .\Metadata.API\Dockerfile -t codewrightio/tagcat:latest
+```
+
+To build the docker installation container:
+
+```
+docker build . -f .\Metadata.Installer\Dockerfile -t codewrightio/tagcat-install:latest
+```
+
 ## TODO Before v1
 
 Deployment Tasks:

@@ -22,4 +22,5 @@ RUN dotnet publish "Metadata.API.csproj" -c Release -o /app/publish /p:UseAppHos
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS=http://+:5551
 ENTRYPOINT ["dotnet", "CodeWright.Metadata.API.dll"]
