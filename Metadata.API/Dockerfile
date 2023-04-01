@@ -6,6 +6,7 @@ EXPOSE 5551
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
+RUN git submodule update --init --recursive
 COPY ["Metadata.API/Metadata.API.csproj", "Metadata.API/"]
 COPY ["Submodules/Common/Common/Common.csproj", "Common/Common/"]
 COPY ["Submodules/Common/Common.Asp/Common.Asp.csproj", "Common/Common.Asp/"]
