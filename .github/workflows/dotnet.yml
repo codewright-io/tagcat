@@ -18,12 +18,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
-    - name: Submodules
-      run: git submodule update --init --recursive
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
