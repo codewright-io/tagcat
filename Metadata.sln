@@ -25,13 +25,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{99A08C6C-3F41-47F5-A7AF-C129899B13B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\CdrProductFetch\Submodules\Common\Common\Common.csproj", "{997EF11D-60D2-4461-95BB-24F0841C8797}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Submodules\Common\Common\Common.csproj", "{997EF11D-60D2-4461-95BB-24F0841C8797}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Asp", "..\CdrProductFetch\Submodules\Common\Common.Asp\Common.Asp.csproj", "{EE3D043A-3862-4CD4-B718-9D168AB2A23D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Asp", "Submodules\Common\Common.Asp\Common.Asp.csproj", "{EE3D043A-3862-4CD4-B718-9D168AB2A23D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EventSourcing", "..\CdrProductFetch\Submodules\Common\Common.EventSourcing\Common.EventSourcing.csproj", "{FD7B4694-C38C-45D2-8EEF-9531A55B28C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EventSourcing", "Submodules\Common\Common.EventSourcing\Common.EventSourcing.csproj", "{FD7B4694-C38C-45D2-8EEF-9531A55B28C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EventSourcing.EntityFramework", "..\CdrProductFetch\Submodules\Common\Common.EventSourcing.EntityFramework\Common.EventSourcing.EntityFramework.csproj", "{4C0F4014-01A5-4E8F-AE2F-28C74C03DC6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EventSourcing.EntityFramework", "Submodules\Common\Common.EventSourcing.EntityFramework\Common.EventSourcing.EntityFramework.csproj", "{4C0F4014-01A5-4E8F-AE2F-28C74C03DC6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

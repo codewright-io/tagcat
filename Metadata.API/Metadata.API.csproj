@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CdrProductFetch\Submodules\Common\Common.Asp\Common.Asp.csproj" />
-    <ProjectReference Include="..\..\CdrProductFetch\Submodules\Common\Common.EventSourcing.EntityFramework\Common.EventSourcing.EntityFramework.csproj" />
+    <ProjectReference Include="..\Submodules\Common\Common.Asp\Common.Asp.csproj" />
+    <ProjectReference Include="..\Submodules\Common\Common.EventSourcing.EntityFramework\Common.EventSourcing.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>
