@@ -7,10 +7,10 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Metadata.Installer/Metadata.Installer.csproj", "Metadata.Installer/"]
 COPY ["Metadata.API/Metadata.API.csproj", "Metadata.API/"]
-COPY ["Common/Common/Common.csproj", "Common/Common/"]
-COPY ["Common/Common.Asp/Common.Asp.csproj", "Common/Common.Asp/"]
-COPY ["Common/Common.EventSourcing/Common.EventSourcing.csproj", "Common/Common.EventSourcing/"]
-COPY ["Common/Common.EventSourcing.EntityFramework/Common.EventSourcing.EntityFramework.csproj", "Common/Common.EventSourcing.EntityFramework/"]
+COPY ["Submodules/Common/Common/Common.csproj", "Submodules/Common/Common/"]
+COPY ["Submodules/Common/Common.Asp/Common.Asp.csproj", "Submodules/Common/Common.Asp/"]
+COPY ["Submodules/Common/Common.EventSourcing/Common.EventSourcing.csproj", "Submodules/Common/Common.EventSourcing/"]
+COPY ["Submodules/Common/Common.EventSourcing.EntityFramework/Common.EventSourcing.EntityFramework.csproj", "Submodules/Common/Common.EventSourcing.EntityFramework/"]
 RUN dotnet restore "Metadata.API/Metadata.API.csproj"
 COPY . .
 WORKDIR "/src/Metadata.Installer"
