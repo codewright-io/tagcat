@@ -6,3 +6,6 @@ services:
       - EXPOSE_SWAGGER=true
     ports:
       - "5551:5551"
+    volumes:
+      - view.db:/app/view.db
+      - meta.db:/app/meta.db

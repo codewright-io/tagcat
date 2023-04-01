@@ -120,5 +120,5 @@ SERVICE_ID={uuid} to set a static service identifier used to log changes
 
 To initialize a database run the following command:
 ```
-docker run -e DATABASE=SQLite codewrightio/tagcat-install:latest
+docker run -e DATABASE=SQLite -v meta.db:/app/meta.db -v view.db:/app/view.db codewrightio/tagcat-install:latest
 ```
