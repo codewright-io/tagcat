@@ -1,0 +1,3 @@
+[submodule "Submodules/Common"]
+	path = Submodules/Common
+	url = https://github.com/codewright-io/Common.git
