@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using CodeWright.Common.Asp;
-using CodeWright.Common.EventSourcing;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);

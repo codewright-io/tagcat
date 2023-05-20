@@ -63,6 +63,7 @@ public class ItemTagQuery : IItemTagQuery
         string culture,
         string? metadataName,
         string? metadataValue,
+        SearchOptions? options,
         int limit,
         int offset)
     {

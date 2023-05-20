@@ -20,6 +20,7 @@ public interface IItemTagQuery
     /// <param name="culture"></param>
     /// <param name="metadataName">An optional metadata name to match</param>
     /// <param name="metadataValue">An optional metadata value to match</param>
+    /// <param name="options">Search options</param>
     /// <param name="limit"></param>
     /// <param name="offset"></param>
     /// <returns></returns>
@@ -29,6 +30,7 @@ public interface IItemTagQuery
         string culture,
         string? metadataName,
         string? metadataValue,
+        SearchOptions? options,
         int limit,
         int offset);
 }

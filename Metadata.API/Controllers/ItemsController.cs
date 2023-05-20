@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Metadata.API.Commands;
-using CodeWright.Metadata.API.Extensions;
 using CodeWright.Metadata.API.Queries;
 using CodeWright.Metadata.API.Queries.Interfaces;
 using Microsoft.AspNetCore.Mvc;
