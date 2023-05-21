@@ -6,7 +6,7 @@
 public static class WebApplicationBuilderExtensions
 {
     /// <summary>
-    /// Create a logger for use while building the web app
+    /// Create a logger for use while building the web application
     /// </summary>
     public static ILogger CreateLogger(this WebApplicationBuilder builder, string name)
     {
@@ -15,6 +15,6 @@ public static class WebApplicationBuilderExtensions
             config.AddConsole();
             config.AddConfiguration(builder.Configuration.GetSection("Logging"));
         });
-        return loggerFactory.CreateLogger("Program");
+        return loggerFactory.CreateLogger(name);
     }
 }

@@ -11,9 +11,9 @@ public static class WebApplicationExtensions
     /// <summary>
     /// Check that the databases are created.
     /// </summary>
-    public static async Task EnsureDatabaseExistsAsync(this WebApplication app)
+    public static async Task EnsureDatabaseExistsAsync(this WebApplication application)
     {
-        var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+        var scopeFactory = application.Services.GetRequiredService<IServiceScopeFactory>();
         using (var scope = scopeFactory.CreateScope())
         {
             var eventStoreContext = scope.ServiceProvider.GetRequiredService<EventSourceDbContext>();
