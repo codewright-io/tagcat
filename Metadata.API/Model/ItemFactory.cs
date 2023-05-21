@@ -50,7 +50,7 @@ namespace CodeWright.Metadata.API.Model
                         item.RemoveMetadata(removeMetadataEvent.RemovedMetadata, removeMetadataEvent.Version, removeMetadataEvent.Time, removeMetadataEvent.UserId, removeMetadataEvent.SourceId);
                         break;
                     case ItemRelationshipsRemovedEvent removeRelationshipsEvent:
-                        item.RemoveReltionships(removeRelationshipsEvent.RemovedRelationships, removeRelationshipsEvent.Version, removeRelationshipsEvent.Time, removeRelationshipsEvent.UserId, removeRelationshipsEvent.SourceId);
+                        item.RemoveRelationships(removeRelationshipsEvent.RemovedRelationships, removeRelationshipsEvent.Version, removeRelationshipsEvent.Time, removeRelationshipsEvent.UserId, removeRelationshipsEvent.SourceId);
                         break;
                     default:
                         throw new InvalidOperationException("Unrecognized event");

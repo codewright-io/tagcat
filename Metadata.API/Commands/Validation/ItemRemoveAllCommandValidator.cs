@@ -1,14 +1,13 @@
 ﻿using CodeWright.Common.EventSourcing;
 using FluentValidation;
 
-namespace CodeWright.Metadata.API.Commands.Validation
+namespace CodeWright.Metadata.API.Commands.Validation;
+
+internal class ItemRemoveAllCommandValidator : AbstractValidator<ItemRemoveAllCommand>
 {
-    internal class ItemRemoveAllCommandValidator : AbstractValidator<ItemRemoveAllCommand>
+    public ItemRemoveAllCommandValidator()
     {
-        public ItemRemoveAllCommandValidator()
-        {
-            RuleFor(command => command.Id).NotEmpty().MaximumLength(Identifiers.MaximumLength);
-            RuleFor(command => command.TenantId).NotEmpty().MaximumLength(Identifiers.MaximumLength);
-        }
+        RuleFor(command => command.Id).NotEmpty().MaximumLength(Identifiers.MaximumLength);
+        RuleFor(command => command.TenantId).NotEmpty().MaximumLength(Identifiers.MaximumLength);
     }
 }

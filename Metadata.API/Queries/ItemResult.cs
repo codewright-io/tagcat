@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Events;
 using CodeWright.Metadata.API.Model;
 
 namespace CodeWright.Metadata.API.Queries;

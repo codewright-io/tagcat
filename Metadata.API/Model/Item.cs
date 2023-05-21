@@ -166,7 +166,7 @@ public class Item : DomainObjectBase
     /// <summary>
     /// Remove the specified relationships from an item
     /// </summary>
-    public void RemoveReltionships(IEnumerable<RelationshipEntry> relationships, long version, DateTime time, string userId, string sourceId)
+    public void RemoveRelationships(IEnumerable<RelationshipEntry> relationships, long version, DateTime time, string userId, string sourceId)
     {
         // Filter out any doubles and work out what is removed
         var removedItems = Relationships.Intersect(relationships).ToList();

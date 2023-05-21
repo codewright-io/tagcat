@@ -63,7 +63,7 @@ namespace CodeWright.Metadata.API.Commands
             if (item == null)
                 throw new NotFoundException("Item not found");
 
-            item.RemoveReltionships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
+            item.RemoveRelationships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
             return new CommandResult { Version = item.Version };
