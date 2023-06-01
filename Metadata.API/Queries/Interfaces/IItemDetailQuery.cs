@@ -13,5 +13,5 @@ public interface IItemDetailQuery
     /// <summary>
     /// Get items by IDs
     /// </summary>
-    Task<IEnumerable<ItemResult>> GetItemsByIdAsync(IEnumerable<string> ids, string tenantId);
+    Task<IEnumerable<ItemResult>> GetByIdsAsync(IEnumerable<string> ids, string tenantId);
 }

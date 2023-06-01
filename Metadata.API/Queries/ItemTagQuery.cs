@@ -104,7 +104,7 @@ public class ItemTagQuery : IItemTagQuery
             .Skip(offset)
             .ToListAsync();
 
-        var results = await _detailQuery.GetItemsByIdAsync(resultIds, tenantId);
+        var results = await _detailQuery.GetByIdsAsync(resultIds, tenantId);
 
         return results;
     }

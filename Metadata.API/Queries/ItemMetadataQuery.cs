@@ -81,7 +81,7 @@ public class ItemMetadataQuery : IItemMetadataQuery
         var itemIds = await GetItemIdsByMetadataAsync(tenantId, name, value, secondaryName, secondaryValue, limit, offset);
 
         // Convert to results
-        var results = await _detailQuery.GetItemsByIdAsync(itemIds, tenantId);
+        var results = await _detailQuery.GetByIdsAsync(itemIds, tenantId);
 
         return results;
     }

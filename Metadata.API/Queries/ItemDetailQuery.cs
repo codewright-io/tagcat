@@ -23,14 +23,14 @@ public class ItemDetailQuery : IItemDetailQuery
     /// <inheritdoc/>
     public async Task<ItemResult> GetByIdAsync(string id, string tenantId)
     {
-        var results = await GetItemsByIdAsync(new List<string> { id }, tenantId);
+        var results = await GetByIdsAsync(new List<string> { id }, tenantId);
         if (!results.Any())
             throw new NotFoundException();
         return results.First();
     }
 
     /// <inheritdoc/>
-    public async Task<IEnumerable<ItemResult>> GetItemsByIdAsync(IEnumerable<string> ids, string tenantId)
+    public async Task<IEnumerable<ItemResult>> GetByIdsAsync(IEnumerable<string> ids, string tenantId)
     {
         // Fetch the metadata for these IDs
         var itemMetadata = await _context.Metadata.AsNoTracking()

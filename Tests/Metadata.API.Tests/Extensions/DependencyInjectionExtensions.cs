@@ -13,8 +13,8 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection ReplaceDbContext<TContext>(this IServiceCollection services, string connectionString)
         where TContext : DbContext
     {
-        var cpntextService = services.First(s => s.ServiceType == typeof(TContext));
-        services.Remove(cpntextService);
+        var contextService = services.First(s => s.ServiceType == typeof(TContext));
+        services.Remove(contextService);
 
         // Need to also remove the db options or they will be re-used
         var optionsService = services.First(s => s.ServiceType == typeof(DbContextOptions<TContext>));

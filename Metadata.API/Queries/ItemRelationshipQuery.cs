@@ -50,7 +50,7 @@ public class ItemRelationshipQuery : IItemRelationshipQuery
         var itemIds = await GetReferencingIdsAsync(targetId, tenantId, limit, offset);
 
         // Convert to results
-        var results = await _detailQuery.GetItemsByIdAsync(itemIds, tenantId);
+        var results = await _detailQuery.GetByIdsAsync(itemIds, tenantId);
         return results;
     }
 }
