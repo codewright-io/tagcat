@@ -51,7 +51,7 @@ builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 // Check that the database have been created
-await app.EnsureDatabaseExistsAsync();
+await app.EnsureTagDatabaseExistsAsync();
 
 // Add errors
 app.UseExceptionHandler("/error");

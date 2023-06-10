@@ -11,7 +11,7 @@ public static class WebApplicationExtensions
     /// <summary>
     /// Check that the databases are created.
     /// </summary>
-    public static async Task EnsureDatabaseExistsAsync(this WebApplication application)
+    public static async Task EnsureTagDatabaseExistsAsync(this WebApplication application)
     {
         var scopeFactory = application.Services.GetRequiredService<IServiceScopeFactory>();
         using (var scope = scopeFactory.CreateScope())
