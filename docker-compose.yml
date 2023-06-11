@@ -7,5 +7,5 @@ services:
     ports:
       - "5551:5551"
     volumes:
-      - view.db:/app/view.db
-      - meta.db:/app/meta.db
+      - view.db:/app/tagview.db
+      - meta.db:/app/tag.db

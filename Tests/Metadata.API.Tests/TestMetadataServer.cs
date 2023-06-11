@@ -16,8 +16,8 @@ internal class TestMetadataServer : WebApplicationFactory<Program>, IAsyncDispos
     public TestMetadataServer()
     {
         // Create some new database files to run the tests with
-        _eventDbFile = CopyDatabase("meta");
-        _viewDbFile = CopyDatabase("view");
+        _eventDbFile = CopyDatabase("tag");
+        _viewDbFile = CopyDatabase("tagview");
     }
 
     private static string CopyDatabase(string database)
