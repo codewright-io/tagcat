@@ -37,4 +37,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tagcat.API\Tagcat.API.csproj" />
+  </ItemGroup>
+
 </Project>

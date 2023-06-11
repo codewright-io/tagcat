@@ -23,7 +23,7 @@ internal class TestMetadataServer : WebApplicationFactory<Program>, IAsyncDispos
     private static string CopyDatabase(string database)
     {
         // Note: You need to have run the installer first to create the database
-        var databaseFile = new FileInfo($"../../../../../Metadata.Installer/{database}.db");
+        var databaseFile = new FileInfo($"../../../../../Tagcat.Installer/{database}.db");
         string outputFile = $"{database}-{Guid.NewGuid()}.db";
         databaseFile.CopyTo(outputFile, true);
 

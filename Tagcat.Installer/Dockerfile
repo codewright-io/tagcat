@@ -5,21 +5,21 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Metadata.Installer/Metadata.Installer.csproj", "Metadata.Installer/"]
-COPY ["Metadata.API/Metadata.API.csproj", "Metadata.API/"]
+COPY ["Tagcat.Installer/Tagcat.Installer.csproj", "Tagcat.Installer/"]
+COPY ["Tagcat.API/Tagcat.API.csproj", "Tagcat.API/"]
 COPY ["Submodules/Common/Common/Common.csproj", "Submodules/Common/Common/"]
 COPY ["Submodules/Common/Common.Asp/Common.Asp.csproj", "Submodules/Common/Common.Asp/"]
 COPY ["Submodules/Common/Common.EventSourcing/Common.EventSourcing.csproj", "Submodules/Common/Common.EventSourcing/"]
 COPY ["Submodules/Common/Common.EventSourcing.EntityFramework/Common.EventSourcing.EntityFramework.csproj", "Submodules/Common/Common.EventSourcing.EntityFramework/"]
-RUN dotnet restore "Metadata.API/Metadata.API.csproj"
+RUN dotnet restore "Tagcat.API/Tagcat.API.csproj"
 COPY . .
-WORKDIR "/src/Metadata.Installer"
-RUN dotnet build "Metadata.Installer.csproj" -c Release -o /app/build
+WORKDIR "/src/Tagcat.Installer"
+RUN dotnet build "Tagcat.Installer.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Metadata.Installer.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Tagcat.Installer.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CodeWright.Metadata.Installer.dll"]
+ENTRYPOINT ["dotnet", "CodeWright.Tagcat.Installer.dll"]

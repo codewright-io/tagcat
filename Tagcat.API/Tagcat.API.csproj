@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="CodeWright.Metadata.API.Tests" />
+    <InternalsVisibleTo Include="CodeWright.Tagcat.API.Tests" />
   </ItemGroup>
 
   <ItemGroup>
