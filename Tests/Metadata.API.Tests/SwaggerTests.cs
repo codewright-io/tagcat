@@ -15,4 +15,4 @@ public class SwaggerTests
         var response = await client.GetAsync(Get.SwaggerIndex());
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
-}   
+}

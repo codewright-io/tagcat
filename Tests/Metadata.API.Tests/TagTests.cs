@@ -1,7 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
 using CodeWright.Metadata.API.Commands;
-using CodeWright.Metadata.API.Queries;
 using CodeWright.Metadata.API.Queries.Views;
 using FluentAssertions;
 
