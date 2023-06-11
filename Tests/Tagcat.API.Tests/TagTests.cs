@@ -12,7 +12,7 @@ public class TagTests
     [Fact(DisplayName = "Add, Remove, Set Tags")]
     public async Task AddRemoveSetTagsAsync()
     {
-        await using var server = new TestMetadataServer();
+        await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
         // Test adding some tags

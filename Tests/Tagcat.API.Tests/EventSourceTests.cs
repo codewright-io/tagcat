@@ -26,7 +26,7 @@ public class EventSourceTests
     [Fact(DisplayName = "Snapshot Performance Test")]
     public async Task SnapshotPerformanceTestAsync()
     {
-        await using var server = new TestMetadataServer();
+        await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
         // Create some unique tags

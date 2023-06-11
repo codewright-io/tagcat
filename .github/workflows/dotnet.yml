@@ -31,14 +31,14 @@ jobs:
     - name: Test
       run: |
         dotnet test --no-build --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
-        mv -v ./Tests/Metadata.API.Tests/TestResults/*/*.* ./Tests/Metadata.API.Tests/TestResults/
+        mv -v ./Tests/Tagcat.API.Tests/TestResults/*/*.* ./Tests/Tagcat.API.Tests/TestResults/
     - name: Create Test Coverage Badge
       uses: simon-k/dotnet-code-coverage-badge@v1.0.0
       id: create_coverage_badge
       with:
         label: Unit Test Coverage
         color: brightgreen
-        path: ./Tests/Metadata.API.Tests/TestResults/coverage.opencover.xml
+        path: ./Tests/Tagcat.API.Tests/TestResults/coverage.opencover.xml
         gist-filename: code-coverage.json
         gist-id: 7b5a559351b80a526c2e401b5b3a4115
         gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}       

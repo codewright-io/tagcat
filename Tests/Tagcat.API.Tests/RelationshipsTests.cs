@@ -31,7 +31,7 @@ public class RelationshipsTests
     [Fact(DisplayName = "Add, Remove, Set Relationships")]
     public async Task AddRemoveSetRelationshipsAsync()
     {
-        await using var server = new TestMetadataServer();
+        await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
         // Test adding some relationships
@@ -124,7 +124,7 @@ public class RelationshipsTests
     [Fact(DisplayName = "Referencing Search")]
     public async Task ReferencingSearchAsync()
     {
-        await using var server = new TestMetadataServer();
+        await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
         // Test adding some relationships

@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Metadata Run": {
+    "Tagcat Run": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

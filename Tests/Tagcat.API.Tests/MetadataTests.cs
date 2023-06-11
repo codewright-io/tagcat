@@ -13,7 +13,7 @@ public class MetadataTests
     [Fact(DisplayName = "Add, Remove, Set Metadata")]
     public async Task AddRemoveSetMetadataAsync()
     {
-        await using var server = new TestMetadataServer();
+        await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
         // Test adding some metadata
@@ -106,7 +106,7 @@ public class MetadataTests
     [Fact(DisplayName = "Search Metadata")]
     public async Task SearchMetadataAsync()
     {
-        await using var server = new TestMetadataServer();
+        await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
         // Add some metadata
