@@ -21,11 +21,20 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection AddAllMetadataService(this IServiceCollection services, ServiceSettings settings)
     {
         services.AddEntityFrameworkEventSourcing(settings.Database, settings.EventConnectionString);
-        services.AddEvents<Item, ItemFactory>(typeof(ItemMetadataAddedEvent).Assembly);
         services.AddMetadataViewDatabase(settings.Database, settings.ViewConnectionString);
         services.AddMetadataCommands();
         services.AddMetadataQueries();
         services.AddMetadataViewUpdaters();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Add blob events
+    /// </summary>
+    public static IServiceCollection AddMetadataEvents(this IServiceCollection services)
+    {
+        services.AddEvents<Item, ItemFactory>(typeof(ItemMetadataAddedEvent).Assembly);
 
         return services;
     }

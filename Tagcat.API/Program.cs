@@ -44,6 +44,7 @@ if (settings.ExposeSwaggerEndpoints)
 // Register metadata services
 builder.Services.AddInternalBus();
 builder.Services.AddAllMetadataService(settings);
+builder.Services.AddMetadataEvents();
 
 // General HTTP services
 builder.Services.AddHttpContextAccessor();
