@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Commands;
-using CodeWright.Metadata.API.Queries;
-using CodeWright.Metadata.API.Queries.Interfaces;
+using CodeWright.Tagcat.API.Commands;
+using CodeWright.Tagcat.API.Queries;
+using CodeWright.Tagcat.API.Queries.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Metadata.API.Controllers;
+namespace Codewright.Tagcat.API.Controllers;
 
 /// <summary>
 /// Item API

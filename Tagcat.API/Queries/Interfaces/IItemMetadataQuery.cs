@@ -1,6 +1,6 @@
-﻿using CodeWright.Metadata.API.Model;
+﻿using CodeWright.Tagcat.API.Model;
 
-namespace CodeWright.Metadata.API.Queries.Interfaces;
+namespace CodeWright.Tagcat.API.Queries.Interfaces;
 
 /// <summary>
 /// Metadata related queries

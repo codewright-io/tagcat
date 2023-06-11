@@ -1,10 +1,10 @@
 ﻿using CodeWright.Common.EventSourcing.EntityFramework;
-using CodeWright.Metadata.API.Queries;
+using CodeWright.Tagcat.API.Queries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace CodeWright.Metadata.Installer;
+namespace CodeWright.Tagcat.Installer;
 
 public static class Install
 {

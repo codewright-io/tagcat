@@ -1,4 +1,4 @@
-﻿namespace CodeWright.Metadata.API.Model
+﻿namespace CodeWright.Tagcat.API.Model
 {
     /// <summary>
     /// Core metadata names

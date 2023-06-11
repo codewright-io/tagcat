@@ -1,8 +1,8 @@
 ﻿using System.CommandLine;
 using CodeWright.Common.Asp;
-using CodeWright.Metadata.API.Events;
-using CodeWright.Metadata.API.Model;
-using CodeWright.Metadata.Installer;
+using CodeWright.Tagcat.API.Events;
+using CodeWright.Tagcat.API.Model;
+using CodeWright.Tagcat.Installer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodeWright.Metadata.API.Model;
+namespace CodeWright.Tagcat.API.Model;
 
 /// <summary>
 /// Relationship information on an item

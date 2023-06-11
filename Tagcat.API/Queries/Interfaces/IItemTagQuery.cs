@@ -1,6 +1,6 @@
-﻿using CodeWright.Metadata.API.Queries.Views;
+﻿using CodeWright.Tagcat.API.Queries.Views;
 
-namespace CodeWright.Metadata.API.Queries.Interfaces;
+namespace CodeWright.Tagcat.API.Queries.Interfaces;
 
 /// <summary>
 /// Tag related queries

@@ -1,7 +1,7 @@
 ﻿using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Events;
+using CodeWright.Tagcat.API.Events;
 
-namespace CodeWright.Metadata.API.Model;
+namespace CodeWright.Tagcat.API.Model;
 
 /// <summary>
 /// The core domain object that metadata and relationships are attached to

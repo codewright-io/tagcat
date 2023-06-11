@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CodeWright.Metadata.API.Model;
+using CodeWright.Tagcat.API.Model;
 
-namespace CodeWright.Metadata.API.Queries;
+namespace CodeWright.Tagcat.API.Queries;
 
 /// <summary>
 /// Item result for search queries

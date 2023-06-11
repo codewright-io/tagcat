@@ -1,7 +1,7 @@
 ﻿using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Events;
+using CodeWright.Tagcat.API.Events;
 
-namespace CodeWright.Metadata.API.Model
+namespace CodeWright.Tagcat.API.Model
 {
     /// <summary>
     /// Create item domain object from events

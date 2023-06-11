@@ -1,4 +1,4 @@
-﻿namespace CodeWright.Metadata.API.Queries.Views;
+﻿namespace CodeWright.Tagcat.API.Queries.Views;
 
 /// <summary>
 /// An item tag entry

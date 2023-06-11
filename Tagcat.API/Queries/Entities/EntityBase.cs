@@ -1,7 +1,7 @@
 ﻿using CodeWright.Common.EventSourcing;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodeWright.Metadata.API.Queries.Entities;
+namespace CodeWright.Tagcat.API.Queries.Entities;
 
 /// <summary>
 /// Base class for database entities

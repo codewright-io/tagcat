@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CodeWright.Metadata.API.Model;
+using CodeWright.Tagcat.API.Model;
 
-namespace CodeWright.Metadata.API.Commands;
+namespace CodeWright.Tagcat.API.Commands;
 
 /// <summary>
 /// Command to remove existing relationships between this item and others.

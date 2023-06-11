@@ -1,4 +1,4 @@
-﻿namespace CodeWright.Metadata.API.Commands;
+﻿namespace CodeWright.Tagcat.API.Commands;
 
 /// <summary>
 /// Command to remove all metadata and relationships on an item.

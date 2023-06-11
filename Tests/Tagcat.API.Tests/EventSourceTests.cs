@@ -3,13 +3,13 @@ using System.Net;
 using System.Net.Http.Json;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Common.EventSourcing.EntityFramework;
-using CodeWright.Metadata.API.Commands;
-using CodeWright.Metadata.API.Events;
-using CodeWright.Metadata.API.Queries.Views;
+using CodeWright.Tagcat.API.Commands;
+using CodeWright.Tagcat.API.Events;
+using CodeWright.Tagcat.API.Queries.Views;
 using FluentAssertions;
 using Newtonsoft.Json;
 
-namespace CodeWright.Metadata.API.Tests;
+namespace CodeWright.Tagcat.API.Tests;
 
 [Collection("Integration")]
 public class EventSourceTests

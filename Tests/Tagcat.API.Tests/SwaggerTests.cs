@@ -1,7 +1,7 @@
 using System.Net;
 using FluentAssertions;
 
-namespace CodeWright.Metadata.API.Tests;
+namespace CodeWright.Tagcat.API.Tests;
 
 [Collection("Integration")]
 public class SwaggerTests

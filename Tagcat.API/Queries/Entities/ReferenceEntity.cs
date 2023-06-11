@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Model;
+using CodeWright.Tagcat.API.Model;
 
-namespace CodeWright.Metadata.API.Queries.Entities;
+namespace CodeWright.Tagcat.API.Queries.Entities;
 
 /// <summary>
 /// The database relationship table

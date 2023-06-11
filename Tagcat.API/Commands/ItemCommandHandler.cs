@@ -1,7 +1,7 @@
 ﻿using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Model;
+using CodeWright.Tagcat.API.Model;
 
-namespace CodeWright.Metadata.API.Commands;
+namespace CodeWright.Tagcat.API.Commands;
 
 /// <summary>
 /// Handler for Item Commands

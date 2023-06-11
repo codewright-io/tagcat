@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CodeWright.Metadata.API.Migrations
+namespace CodeWright.Tagcat.API.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

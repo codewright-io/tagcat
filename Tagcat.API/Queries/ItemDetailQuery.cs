@@ -1,9 +1,9 @@
 ﻿using CodeWright.Common.Exceptions;
-using CodeWright.Metadata.API.Model;
-using CodeWright.Metadata.API.Queries.Interfaces;
+using CodeWright.Tagcat.API.Model;
+using CodeWright.Tagcat.API.Queries.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeWright.Metadata.API.Queries;
+namespace CodeWright.Tagcat.API.Queries;
 
 /// <summary>
 /// Item detail queries

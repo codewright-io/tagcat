@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodeWright.Metadata.API.Commands;
+namespace CodeWright.Tagcat.API.Commands;
 
 /// <summary>
 /// Command to remove existing tags from an item.

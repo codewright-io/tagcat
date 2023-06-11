@@ -1,4 +1,4 @@
-﻿namespace CodeWright.Metadata.API.Commands;
+﻿namespace CodeWright.Tagcat.API.Commands;
 
 /// <summary>
 /// Command to set tags on an item, replacing all existing tags.

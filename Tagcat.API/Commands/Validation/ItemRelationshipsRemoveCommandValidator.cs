@@ -1,7 +1,7 @@
 ﻿using CodeWright.Common.EventSourcing;
 using FluentValidation;
 
-namespace CodeWright.Metadata.API.Commands.Validation;
+namespace CodeWright.Tagcat.API.Commands.Validation;
 
 internal class ItemRelationshipsRemoveCommandValidator : AbstractValidator<ItemRelationshipsRemoveCommand>
 {

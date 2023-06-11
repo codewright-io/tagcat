@@ -1,9 +1,9 @@
-﻿using CodeWright.Metadata.API.Model;
-using CodeWright.Metadata.API.Queries.Interfaces;
-using CodeWright.Metadata.API.Queries.Views;
+﻿using CodeWright.Tagcat.API.Model;
+using CodeWright.Tagcat.API.Queries.Interfaces;
+using CodeWright.Tagcat.API.Queries.Views;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeWright.Metadata.API.Queries;
+namespace CodeWright.Tagcat.API.Queries;
 
 /// <summary>
 /// Tag related queries

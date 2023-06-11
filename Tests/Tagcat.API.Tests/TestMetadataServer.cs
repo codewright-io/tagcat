@@ -1,11 +1,11 @@
 ﻿using CodeWright.Common.EventSourcing.EntityFramework;
-using CodeWright.Metadata.API.Queries;
+using CodeWright.Tagcat.API.Queries;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CodeWright.Metadata.API.Tests;
+namespace CodeWright.Tagcat.API.Tests;
 
 internal class TestMetadataServer : WebApplicationFactory<Program>, IAsyncDisposable
 {

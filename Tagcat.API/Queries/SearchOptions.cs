@@ -1,4 +1,4 @@
-﻿namespace CodeWright.Metadata.API.Queries;
+﻿namespace CodeWright.Tagcat.API.Queries;
 
 /// <summary>
 /// Options for searches

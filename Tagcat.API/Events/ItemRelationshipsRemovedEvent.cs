@@ -1,7 +1,7 @@
 ﻿using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Model;
+using CodeWright.Tagcat.API.Model;
 
-namespace CodeWright.Metadata.API.Events;
+namespace CodeWright.Tagcat.API.Events;
 
 /// <summary>
 /// Relationships were removed from an item

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CodeWright.Metadata.API.Controllers;
+namespace CodeWright.Tagcat.API.Controllers;
 
 /// <summary>
 /// Controller for displaying errors

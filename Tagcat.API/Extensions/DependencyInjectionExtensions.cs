@@ -1,12 +1,12 @@
 ﻿using CodeWright.Common;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Commands;
-using CodeWright.Metadata.API.Commands.Validation;
-using CodeWright.Metadata.API.Events;
-using CodeWright.Metadata.API.Model;
-using CodeWright.Metadata.API.Queries;
-using CodeWright.Metadata.API.Queries.Interfaces;
+using CodeWright.Tagcat.API.Commands;
+using CodeWright.Tagcat.API.Commands.Validation;
+using CodeWright.Tagcat.API.Events;
+using CodeWright.Tagcat.API.Model;
+using CodeWright.Tagcat.API.Queries;
+using CodeWright.Tagcat.API.Queries.Interfaces;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -93,7 +93,7 @@ public static class DependencyInjectionExtensions
     /// </summary>
     public static IServiceCollection AddMetadataViewDatabase(this IServiceCollection services, DatabaseType database, string connectionString)
     {
-        services.AddDbContext<MetadataDbContext>(options => options.UseDatabase(database, connectionString, "CodeWright.Metadata.API"));
+        services.AddDbContext<MetadataDbContext>(options => options.UseDatabase(database, connectionString, "CodeWright.Tagcat.API"));
 
         return services;
     }

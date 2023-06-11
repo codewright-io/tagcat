@@ -1,5 +1,5 @@
 ﻿using CodeWright.Common.EventSourcing.EntityFramework;
-using CodeWright.Metadata.API.Queries;
+using CodeWright.Tagcat.API.Queries;
 
 namespace Microsoft.AspNetCore.Builder;
 

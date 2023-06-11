@@ -1,11 +1,11 @@
 using System.Net;
 using System.Net.Http.Json;
-using CodeWright.Metadata.API.Commands;
-using CodeWright.Metadata.API.Model;
-using CodeWright.Metadata.API.Queries;
+using CodeWright.Tagcat.API.Commands;
+using CodeWright.Tagcat.API.Model;
+using CodeWright.Tagcat.API.Queries;
 using FluentAssertions;
 
-namespace CodeWright.Metadata.API.Tests;
+namespace CodeWright.Tagcat.API.Tests;
 
 [Collection("Integration")]
 public class MetadataTests

@@ -24,7 +24,7 @@ First install the ef tools:
 dotnet tool install --global dotnet-ef
 ```
 
-Then run this command from the "Metadata.API" folder:
+Then run this command from the "Tagcat.API" folder:
 ```
 dotnet ef migrations add InitialCreate -c MetadataDbContext
 ```
@@ -34,7 +34,7 @@ Then run this command from the "Common/EventSourcing.EntityFramework" folder:
 dotnet ef migrations add InitialCreate
 ```
 
-*Note:* The EventSourcing migration I needed to change the Migrations assembly and run from the Metadata.API project.
+*Note:* The EventSourcing migration I needed to change the Migrations assembly and run from the Tagcat.API project.
       I think that it needs its own migrations builder project.
 
 
@@ -58,13 +58,13 @@ The public folder will contain the documents
 To build the docker container:
 
 ```
-docker build . -f .\Metadata.API\Dockerfile -t codewrightio/tagcat:latest
+docker build . -f .\Tagcat.API\Dockerfile -t codewrightio/tagcat:latest
 ```
 
 To build the docker installation container:
 
 ```
-docker build . -f .\Metadata.Installer\Dockerfile -t codewrightio/tagcat-install:latest
+docker build . -f .\Tagcat.Installer\Dockerfile -t codewrightio/tagcat-install:latest
 ```
 
 ## TODO Before v1

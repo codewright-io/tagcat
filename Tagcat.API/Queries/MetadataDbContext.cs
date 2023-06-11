@@ -1,7 +1,7 @@
-﻿using CodeWright.Metadata.API.Queries.Entities;
+﻿using CodeWright.Tagcat.API.Queries.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeWright.Metadata.API.Queries;
+namespace CodeWright.Tagcat.API.Queries;
 
 /// <summary>
 /// Database context for metadata views and queries

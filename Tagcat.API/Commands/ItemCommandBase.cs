@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.EventSourcing;
 
-namespace CodeWright.Metadata.API.Commands;
+namespace CodeWright.Tagcat.API.Commands;
 
 /// <summary>
 /// Base class for commands

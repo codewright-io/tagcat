@@ -1,9 +1,9 @@
 ﻿using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Events;
-using CodeWright.Metadata.API.Queries.Entities;
+using CodeWright.Tagcat.API.Events;
+using CodeWright.Tagcat.API.Queries.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CodeWright.Metadata.API.Queries;
+namespace CodeWright.Tagcat.API.Queries;
 
 internal class ItemRelationshipUpdater : 
     IEventHandler<ItemRelationshipsAddedEvent>, 

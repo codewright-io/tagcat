@@ -1,4 +1,4 @@
-﻿namespace CodeWright.Metadata.API.Tests
+﻿namespace CodeWright.Tagcat.API.Tests
 {
     public static class Post
     {

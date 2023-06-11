@@ -1,8 +1,8 @@
 ﻿using CodeWright.Common.EventSourcing;
-using CodeWright.Metadata.API.Events;
-using CodeWright.Metadata.API.Queries.Entities;
+using CodeWright.Tagcat.API.Events;
+using CodeWright.Tagcat.API.Queries.Entities;
 
-namespace CodeWright.Metadata.API.Queries;
+namespace CodeWright.Tagcat.API.Queries;
 
 internal class ItemMetadataUpdater : 
     IEventHandler<ItemMetadataAddedEvent>, 
