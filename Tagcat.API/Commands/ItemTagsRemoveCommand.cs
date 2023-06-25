@@ -18,5 +18,5 @@ public class ItemTagsRemoveCommand : ItemCommandBase
     /// </summary>
     /// <example>["Comedy", "Romance"]</example>
     [Required]
-    public IEnumerable<string> Tags { get; init; } = Enumerable.Empty<string>();
+    public required IEnumerable<string> Tags { get; init; }
 }

@@ -18,7 +18,7 @@ public class RelationshipEntry : IEquatable<RelationshipEntry>
     /// </summary>
     /// <example>Comedy</example>
     [Required]
-    public string TargetId { get; init; } = string.Empty;
+    public required string TargetId { get; init; }
 
     #region IEquatable
     /// <inheritdoc/>

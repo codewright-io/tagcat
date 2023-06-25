@@ -12,5 +12,5 @@ public class ItemRelationshipsAddCommand : ItemCommandBase
     /// A list of references or relationships that the object has to other objects.
     /// </summary>
     [Required]
-    public IEnumerable<RelationshipEntry> Relationships { get; init; } = Enumerable.Empty<RelationshipEntry>();
+    public required IEnumerable<RelationshipEntry> Relationships { get; init; }
 }

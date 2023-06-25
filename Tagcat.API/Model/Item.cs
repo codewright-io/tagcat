@@ -12,7 +12,7 @@ public class Item : DomainObjectBase
     public override string TypeId { get; } = DomainTypeId;
 
     /// <summary>A unique ID for the type</summary>
-    public static string DomainTypeId { get; } = "item";
+    public static readonly string DomainTypeId = "item";
 
     /// <summary>
     /// A list of relationships or relationships that the object has to other objects.

@@ -10,10 +10,10 @@ public class ItemSetAllCommand : ItemCommandBase
     /// <summary>
     /// A key/value list of metadata properties on the object.
     /// </summary>
-    public IEnumerable<MetadataEntry> Metadata { get; init; } = Enumerable.Empty<MetadataEntry>();
+    public required IEnumerable<MetadataEntry> Metadata { get; init; }
 
     /// <summary>
     /// A list of references or relationships that the object has to other objects.
     /// </summary>
-    public IEnumerable<RelationshipEntry> Relationships { get; init; } = Enumerable.Empty<RelationshipEntry>();
+    public required IEnumerable<RelationshipEntry> Relationships { get; init; }
 }

@@ -15,5 +15,5 @@ public class ItemTagsSetCommand : ItemCommandBase
     /// A list of tag data on the object.
     /// </summary>
     /// <example>["Comedy", "Romance"]</example>
-    public IEnumerable<string> Tags { get; init; } = Enumerable.Empty<string>();
+    public required IEnumerable<string> Tags { get; init; }
 }

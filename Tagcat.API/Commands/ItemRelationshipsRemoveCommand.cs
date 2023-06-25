@@ -12,5 +12,5 @@ public class ItemRelationshipsRemoveCommand : ItemCommandBase
     /// A list of references or relationships to remove.
     /// </summary>
     [Required]
-    public IEnumerable<RelationshipEntry> Relationships { get; init; } = Enumerable.Empty<RelationshipEntry>();
+    public required IEnumerable<RelationshipEntry> Relationships { get; init; }
 }

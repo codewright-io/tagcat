@@ -10,5 +10,5 @@ public class ItemMetadataSetCommand : ItemCommandBase
     /// <summary>
     /// A list of metadata properties on the item.
     /// </summary>
-    public IEnumerable<MetadataEntry> Metadata { get; init; } = Enumerable.Empty<MetadataEntry>();
+    public required IEnumerable<MetadataEntry> Metadata { get; init; }
 }
