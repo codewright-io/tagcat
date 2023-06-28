@@ -44,7 +44,7 @@ public class MetadataTests
         {
             Id = "test",
             TenantId = "tenant",
-            Metadata = new List<MetadataEntry> { new MetadataEntry { Name = "Color" } }
+            Metadata = new List<MetadataEntry> { new MetadataEntry { Name = "Color", Value = "" } }
         };
         response = await client.PostAsJsonAsync(Post.RemoveMetadata(), removeCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
