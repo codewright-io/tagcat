@@ -41,7 +41,7 @@ public class ItemMetadataCommandHandler :
     /// </summary>
     public async Task<CommandResult> HandleAsync(ItemMetadataAddCommand command, string userId)
     {
-        var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+        var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
         if (item == null)
         {
             item = new Item { Id = command.Id, TenantId = command.TenantId };
@@ -62,7 +62,7 @@ public class ItemMetadataCommandHandler :
     /// </summary>
     public async Task<CommandResult> HandleAsync(ItemMetadataRemoveCommand command, string userId)
     {
-        var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+        var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
         if (item == null)
             throw new NotFoundException("Item not found");
 
@@ -77,7 +77,7 @@ public class ItemMetadataCommandHandler :
     /// </summary>
     public async Task<CommandResult> HandleAsync(ItemMetadataSetCommand command, string userId)
     {
-        var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+        var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
         if (item == null)
         {
             item = new Item { Id = command.Id, TenantId = command.TenantId };

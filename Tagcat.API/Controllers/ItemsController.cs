@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using CodeWright.Common.Asp;
 using CodeWright.Common.EventSourcing;
 using CodeWright.Tagcat.API.Commands;
+using CodeWright.Tagcat.API.Model;
 using CodeWright.Tagcat.API.Queries;
 using CodeWright.Tagcat.API.Queries.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -78,5 +79,5 @@ public class ItemsController : ControllerBase
         string id,
         [FromQuery] long? fromVersion = null,
         [FromQuery, Range(1, int.MaxValue)] int limit = 20)
-        => eventStore.GetByIdAsync(id, tenantId, fromVersion ?? -1, limit);
+        => eventStore.GetByIdAsync(id, tenantId, Item.DomainTypeId, fromVersion ?? -1, limit);
 }

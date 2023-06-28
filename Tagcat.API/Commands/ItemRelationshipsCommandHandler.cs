@@ -41,7 +41,7 @@ namespace CodeWright.Tagcat.API.Commands
         /// </summary>
         public async Task<CommandResult> HandleAsync(ItemRelationshipsAddCommand command, string userId)
         {
-            var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+            var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
             if (item == null)
             {
                 item = new Item { Id = command.Id, TenantId = command.TenantId };
@@ -59,7 +59,7 @@ namespace CodeWright.Tagcat.API.Commands
         /// </summary>
         public async Task<CommandResult> HandleAsync(ItemRelationshipsRemoveCommand command, string userId)
         {
-            var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+            var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
             if (item == null)
                 throw new NotFoundException("Item not found");
 
@@ -74,7 +74,7 @@ namespace CodeWright.Tagcat.API.Commands
         /// </summary>
         public async Task<CommandResult> HandleAsync(ItemRelationshipsSetCommand command, string userId)
         {
-            var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+            var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
             if (item == null)
             {
                 item = new Item { Id = command.Id, TenantId = command.TenantId };

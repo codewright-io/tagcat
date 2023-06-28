@@ -27,7 +27,11 @@ namespace CodeWright.Tagcat.API.Model
 
         private static Item? FromEventsInternal(Item? model, IEnumerable<IDomainEvent> events)
         {
-            if (events == null || !events.Any())
+            if (events == null)
+                return null;
+
+            var filteredEvents = events.Where(ev => ev.TypeId == Item.DomainTypeId);
+            if (!filteredEvents.Any())
                 return null;
 
             var item = model ?? new Item

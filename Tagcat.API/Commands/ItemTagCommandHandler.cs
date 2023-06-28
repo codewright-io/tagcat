@@ -94,7 +94,7 @@ public class ItemTagCommandHandler :
         if (string.IsNullOrEmpty(command.Culture))
             throw new InvalidInternalStateException("No culture was determined");
 
-        var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+        var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
         if (item == null)
         {
             item = new Item { Id = command.Id, TenantId = command.TenantId };
@@ -120,7 +120,7 @@ public class ItemTagCommandHandler :
         if (string.IsNullOrEmpty(command.Culture))
             throw new InvalidInternalStateException("No culture was determined");
 
-        var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+        var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
         if (item == null)
             throw new NotFoundException("Item not found");
 
@@ -142,7 +142,7 @@ public class ItemTagCommandHandler :
         if (string.IsNullOrEmpty(command.Culture))
             throw new InvalidInternalStateException("No culture was determined");
 
-        var item = await _repository.GetByIdAsync(command.Id, command.TenantId);
+        var item = await _repository.GetByIdAsync(command.Id, command.TenantId, Item.DomainTypeId);
         if (item == null)
         {
             item = new Item { Id = command.Id, TenantId = command.TenantId };
