@@ -51,7 +51,7 @@ namespace CodeWright.Tagcat.API.Commands
             item.AddRelationships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
-            return new CommandResult { Version = item.Version };
+            return new CommandResult { Id = item.Id, Version = item.Version };
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace CodeWright.Tagcat.API.Commands
             item.RemoveRelationships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
-            return new CommandResult { Version = item.Version };
+            return new CommandResult { Id = item.Id, Version = item.Version };
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace CodeWright.Tagcat.API.Commands
             item.SetRelationships(command.Relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
             await _repository.SaveAsync(item, userId);
-            return new CommandResult { Version = item.Version };
+            return new CommandResult { Id = item.Id, Version = item.Version };
         }
     }
 }

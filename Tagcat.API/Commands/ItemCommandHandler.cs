@@ -45,7 +45,7 @@ public class ItemCommandHandler :
             Metadata = command.Metadata,
         }, userId);
 
-        return new CommandResult { Version = long.Max(relationshipsResult.Version, metadataResult.Version) };
+        return new CommandResult { Id = metadataResult.Id, Version = long.Max(relationshipsResult.Version, metadataResult.Version) };
     }
 
     /// <summary>

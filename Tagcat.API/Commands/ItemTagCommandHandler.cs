@@ -109,7 +109,7 @@ public class ItemTagCommandHandler :
         item.AddRelationships(relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
         await _repository.SaveAsync(item, userId);
-        return new CommandResult { Version = item.Version };
+        return new CommandResult { Id = item.Id, Version = item.Version };
     }
 
     /// <summary>
@@ -131,7 +131,7 @@ public class ItemTagCommandHandler :
         item.RemoveRelationships(relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
         await _repository.SaveAsync(item, userId);
-        return new CommandResult { Version = item.Version };
+        return new CommandResult { Id = item.Id, Version = item.Version };
     }
 
     /// <summary>
@@ -156,6 +156,6 @@ public class ItemTagCommandHandler :
         item.SetRelationships(relationships, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
         await _repository.SaveAsync(item, userId);
-        return new CommandResult { Version = item.Version };
+        return new CommandResult { Id = item.Id, Version = item.Version };
     }
 }

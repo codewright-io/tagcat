@@ -54,7 +54,7 @@ public class ItemMetadataCommandHandler :
 
         // TODO send to bus?
 
-        return new CommandResult { Version = item.Version };
+        return new CommandResult { Id = item.Id, Version = item.Version };
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ public class ItemMetadataCommandHandler :
         item.RemoveMetadata(command.Metadata, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
         await _repository.SaveAsync(item, userId);
-        return new CommandResult { Version = item.Version };
+        return new CommandResult { Id = item.Id, Version = item.Version };
     }
 
     /// <summary>
@@ -87,6 +87,6 @@ public class ItemMetadataCommandHandler :
         item.SetMetadata(command.Metadata, _versionProvider.GetNewVersion(), _timeProvider.GetCurrentTimeUtc(), userId, _settings.ServiceId);
 
         await _repository.SaveAsync(item, userId);
-        return new CommandResult { Version = item.Version };
+        return new CommandResult { Id = item.Id, Version = item.Version };
     }
 }
