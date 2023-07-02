@@ -1,4 +1,5 @@
 using System.Net;
+using CodeWright.Common.Asp.Routes;
 using FluentAssertions;
 
 namespace CodeWright.Tagcat.API.Tests;
@@ -12,7 +13,7 @@ public class SwaggerTests
         await using var server = new TestTagcatServer();
         using var client = server.CreateClient();
 
-        var response = await client.GetAsync(Get.SwaggerIndex());
+        var response = await client.GetAsync(HttpGet.SwaggerIndex());
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }

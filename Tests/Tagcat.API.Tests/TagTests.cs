@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using CodeWright.Common.Asp.Routes;
 using CodeWright.Tagcat.API.Commands;
 using CodeWright.Tagcat.API.Queries.Views;
 using FluentAssertions;
@@ -22,12 +23,12 @@ public class TagTests
             TenantId = "tenant", 
             Tags = new List<string> { "White", "Eugene" } 
         };
-        var response = await client.PostAsJsonAsync(Post.AddTags(), addCommand);
+        var response = await client.PostAsJsonAsync(HttpPost.AddTags(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        var tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemTags("tenant", "test"));
+        var tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(HttpGet.ItemTags("tenant", "test"));
         tags.Should().BeEquivalentTo(new List<ItemTagViewEntry> 
         {
             new ItemTagViewEntry { DisplayName = "White" },
@@ -41,12 +42,12 @@ public class TagTests
             TenantId = "tenant",
             Tags = new List<string> { "White" }
         };
-        response = await client.PostAsJsonAsync(Post.RemoveTags(), removeCommand);
+        response = await client.PostAsJsonAsync(HttpPost.RemoveTags(), removeCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemTags("tenant", "test"));
+        tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(HttpGet.ItemTags("tenant", "test"));
         tags.Should().BeEquivalentTo(new List<ItemTagViewEntry>
         {
             new ItemTagViewEntry { DisplayName = "Eugene" },
@@ -59,12 +60,12 @@ public class TagTests
             TenantId = "tenant",
             Tags = new List<string> { "Blue" }
         };
-        response = await client.PostAsJsonAsync(Post.AddTags(), addCommand);
+        response = await client.PostAsJsonAsync(HttpPost.AddTags(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemTags("tenant", "test"));
+        tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(HttpGet.ItemTags("tenant", "test"));
         tags.Should().BeEquivalentTo(new List<ItemTagViewEntry>
         {
             new ItemTagViewEntry { DisplayName = "Blue" },
@@ -78,19 +79,19 @@ public class TagTests
             TenantId = "tenant",
             Tags = new List<string> { "Pink", "Chaotic" }
         };
-        response = await client.PostAsJsonAsync(Post.SetTags(), setCommand);
+        response = await client.PostAsJsonAsync(HttpPost.SetTags(), setCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemTags("tenant", "test"));
+        tags = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(HttpGet.ItemTags("tenant", "test"));
         tags.Should().BeEquivalentTo(new List<ItemTagViewEntry>
         {
             new ItemTagViewEntry { DisplayName = "Pink" },
             new ItemTagViewEntry { DisplayName = "Chaotic" },
         }, options => options.Excluding(p => p.Id));
 
-        var searchResult = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(Get.ItemsByTag("tenant", "Pink"));
+        var searchResult = await client.GetFromJsonAsync<IEnumerable<ItemTagViewEntry>>(HttpGet.ItemsByTag("tenant", "Pink"));
         Assert.NotNull(searchResult);
         searchResult.Single().Should().BeEquivalentTo(setCommand, options => options.ExcludingMissingMembers());
     }

@@ -1,10 +1,10 @@
 using System.Net;
 using System.Net.Http.Json;
+using CodeWright.Common.Asp.Routes;
 using CodeWright.Tagcat.API.Commands;
 using CodeWright.Tagcat.API.Model;
 using CodeWright.Tagcat.API.Queries;
 using FluentAssertions;
-using Microsoft.AspNetCore.Hosting.Server;
 using Newtonsoft.Json;
 
 namespace CodeWright.Tagcat.API.Tests;
@@ -15,7 +15,7 @@ public class RelationshipsTests
     private async Task<IEnumerable<RelationshipEntry>> GetRelationshipsAsync(HttpClient client, string tenantId, string id)
     {
         // Use the Newtonsoft parser because the default one struggles with enums as strings
-        var stringResult = await client.GetStringAsync(Get.ItemRelationships(tenantId, id));
+        var stringResult = await client.GetStringAsync(HttpGet.ItemRelationships(tenantId, id));
         var result = JsonConvert.DeserializeObject<IEnumerable<RelationshipEntry>>(stringResult);
         return result ?? throw new ApplicationException("Can't de-serialize relationships");
     }
@@ -23,7 +23,7 @@ public class RelationshipsTests
     private async Task<IEnumerable<ItemResult>> GetReferencingAsync(HttpClient client, string tenantId, string targetId)
     {
         // Use the Newtonsoft parser because the default one struggles with enums as strings
-        var stringResult = await client.GetStringAsync(Get.Referencing(tenantId, targetId));
+        var stringResult = await client.GetStringAsync(HttpGet.Referencing(tenantId, targetId));
         var result = JsonConvert.DeserializeObject<IEnumerable<ItemResult>>(stringResult);
         return result ?? throw new ApplicationException("Can't de-serialize relationships");
     }
@@ -45,7 +45,7 @@ public class RelationshipsTests
                 new RelationshipEntry { TargetId="def", Type = RelationshipType.SubcategoryOf },
             } 
         };
-        var response = await client.PostAsJsonAsync(Post.AddRelationships(), addCommand);
+        var response = await client.PostAsJsonAsync(HttpPost.AddRelationships(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
@@ -64,7 +64,7 @@ public class RelationshipsTests
             TenantId = "tenant",
             Relationships = new List<RelationshipEntry> { new RelationshipEntry { TargetId = "abc", Type = RelationshipType.AliasOf } },
         };
-        response = await client.PostAsJsonAsync(Post.RemoveRelationships(), removeCommand);
+        response = await client.PostAsJsonAsync(HttpPost.RemoveRelationships(), removeCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
@@ -85,7 +85,7 @@ public class RelationshipsTests
                 new RelationshipEntry { TargetId="ghi", Type = RelationshipType.TranslationOf },
             }
         };
-        response = await client.PostAsJsonAsync(Post.AddRelationships(), addCommand);
+        response = await client.PostAsJsonAsync(HttpPost.AddRelationships(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
@@ -108,7 +108,7 @@ public class RelationshipsTests
                 new RelationshipEntry { TargetId="mno", Type = RelationshipType.ChildOf },
             }
         };
-        response = await client.PostAsJsonAsync(Post.SetReflationships(), setCommand);
+        response = await client.PostAsJsonAsync(HttpPost.SetReflationships(), setCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
@@ -137,7 +137,7 @@ public class RelationshipsTests
                 new RelationshipEntry { TargetId="test2", Type = RelationshipType.AliasOf },
             }
         };
-        var response = await client.PostAsJsonAsync(Post.AddRelationships(), addCommand);
+        var response = await client.PostAsJsonAsync(HttpPost.AddRelationships(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         addCommand = new ItemRelationshipsAddCommand
@@ -149,7 +149,7 @@ public class RelationshipsTests
                 new RelationshipEntry { TargetId="test1", Type = RelationshipType.AliasOf },
             }
         };
-        response = await client.PostAsJsonAsync(Post.AddRelationships(), addCommand);
+        response = await client.PostAsJsonAsync(HttpPost.AddRelationships(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         addCommand = new ItemRelationshipsAddCommand
@@ -161,7 +161,7 @@ public class RelationshipsTests
                 new RelationshipEntry { TargetId="test1", Type = RelationshipType.EquivalentTo },
             }
         };
-        response = await client.PostAsJsonAsync(Post.AddRelationships(), addCommand);
+        response = await client.PostAsJsonAsync(HttpPost.AddRelationships(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update

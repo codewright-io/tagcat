@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using CodeWright.Common.Asp.Routes;
 using CodeWright.Tagcat.API.Commands;
 using CodeWright.Tagcat.API.Model;
 using CodeWright.Tagcat.API.Queries;
@@ -27,12 +28,12 @@ public class MetadataTests
                 new MetadataEntry { Name = "Author", Value = "Eugene" },
             } 
         };
-        var response = await client.PostAsJsonAsync(Post.AddMetadata(), addCommand);
+        var response = await client.PostAsJsonAsync(HttpPost.AddMetadata(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        var metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(Get.ItemMetadata("tenant", "test"));
+        var metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(HttpGet.ItemMetadata("tenant", "test"));
         metadata.Should().BeEquivalentTo(new List<MetadataEntry> 
         { 
             new MetadataEntry { Name = "Color", Value = "White" },
@@ -46,12 +47,12 @@ public class MetadataTests
             TenantId = "tenant",
             Metadata = new List<MetadataEntry> { new MetadataEntry { Name = "Color", Value = "" } }
         };
-        response = await client.PostAsJsonAsync(Post.RemoveMetadata(), removeCommand);
+        response = await client.PostAsJsonAsync(HttpPost.RemoveMetadata(), removeCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(Get.ItemMetadata("tenant", "test"));
+        metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(HttpGet.ItemMetadata("tenant", "test"));
         metadata.Should().BeEquivalentTo(new List<MetadataEntry>
         {
             new MetadataEntry { Name = "Author", Value = "Eugene" },
@@ -67,12 +68,12 @@ public class MetadataTests
                 new MetadataEntry { Name = "Color", Value = "Blue" },
             }
         };
-        response = await client.PostAsJsonAsync(Post.AddMetadata(), addCommand);
+        response = await client.PostAsJsonAsync(HttpPost.AddMetadata(), addCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(Get.ItemMetadata("tenant", "test"));
+        metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(HttpGet.ItemMetadata("tenant", "test"));
         metadata.Should().BeEquivalentTo(new List<MetadataEntry>
         {
             new MetadataEntry { Name = "Color", Value = "Blue" },
@@ -90,12 +91,12 @@ public class MetadataTests
                 new MetadataEntry { Name = "Alignment", Value = "Chaotic" },
             }
         };
-        response = await client.PostAsJsonAsync(Post.SetMetadata(), setCommand);
+        response = await client.PostAsJsonAsync(HttpPost.SetMetadata(), setCommand);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         await Task.Delay(1000); // Wait for update
 
-        metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(Get.ItemMetadata("tenant", "test"));
+        metadata = await client.GetFromJsonAsync<IEnumerable<MetadataEntry>>(HttpGet.ItemMetadata("tenant", "test"));
         metadata.Should().BeEquivalentTo(new List<MetadataEntry>
         {
             new MetadataEntry { Name = "Color", Value = "Pink" },
@@ -164,29 +165,29 @@ public class MetadataTests
 
         foreach (var setCommand in setCommands)
         {
-            var response = await client.PostAsJsonAsync(Post.SetMetadata(), setCommand);
+            var response = await client.PostAsJsonAsync(HttpPost.SetMetadata(), setCommand);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         // Check for no results
-        var results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(Get.SearchMetadata("tenant1", "Animal", "Lion", 20, 0));
+        var results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(HttpGet.SearchMetadata("tenant1", "Animal", "Lion", 20, 0));
         Assert.NotNull(results);
         results.Count().Should().Be(0);
 
         // Check for one result
-        results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(Get.SearchMetadata("tenant1", "Animal", "Tiger", 20, 0));
+        results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(HttpGet.SearchMetadata("tenant1", "Animal", "Tiger", 20, 0));
         Assert.NotNull(results);
         results.Count().Should().Be(1);
         results.Should().BeEquivalentTo(setCommands.Where(c => c.Id == "test3"));
 
         // Check for two results
-        results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(Get.SearchMetadata("tenant1", "Color", "Blue", 20, 0));
+        results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(HttpGet.SearchMetadata("tenant1", "Color", "Blue", 20, 0));
         Assert.NotNull(results); 
         results.Count().Should().Be(2);
         results.Should().BeEquivalentTo(setCommands.Where(c => c.Id != "test2" && c.TenantId == "tenant1"));
 
         // Check secondary filter
-        results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(Get.SearchMetadata("tenant1", "Color", "Blue", "Language", "English", 20, 0));
+        results = await client.GetFromJsonAsync<IEnumerable<ItemResult>>(HttpGet.SearchMetadata("tenant1", "Color", "Blue", "Language", "English", 20, 0));
         Assert.NotNull(results); 
         results.Count().Should().Be(1);
         results.Should().BeEquivalentTo(setCommands.Where(c => c.Id == "test1"));
