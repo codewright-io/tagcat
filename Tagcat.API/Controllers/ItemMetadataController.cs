@@ -6,6 +6,7 @@ using CodeWright.Tagcat.API.Model;
 using CodeWright.Tagcat.API.Queries;
 using CodeWright.Tagcat.API.Queries.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using NpgsqlTypes;
 
 namespace CodeWright.Tagcat.API.Controllers;
 
@@ -22,7 +23,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="handler">The command handler</param>
     /// <param name="command">The set metadata command</param>
     /// <returns>The command result</returns>
-    [HttpPost]
+    [HttpPost(Name = "SetMetadata")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
@@ -36,7 +37,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="handler">The command handler</param>
     /// <param name="command">The add metadata command</param>
     /// <returns>The command result</returns>
-    [HttpPost("add")]
+    [HttpPost("add", Name = "AddMetadata")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> AddAsync(
@@ -52,7 +53,7 @@ public class ItemMetadataController : ControllerBase
     /// <returns>The command result</returns>
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
-    [HttpPost("remove")]
+    [HttpPost("remove", Name = "RemoveMetadata")]
     public Task<CommandResult> RemoveAsync(
         [FromServices] ICommandHandler<ItemMetadataRemoveCommand> handler,
         [FromBody] ItemMetadataRemoveCommand command)
@@ -65,7 +66,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="tenantId">The tenant ID for the item</param>
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of metadata on the item</returns>
-    [HttpGet("{tenantId}/{id}")]
+    [HttpGet("{tenantId}/{id}", Name = "GetMetadataById")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<MetadataEntry>> GetByIdAsync(
         [FromServices] IItemMetadataQuery query, 
@@ -85,7 +86,7 @@ public class ItemMetadataController : ControllerBase
     /// <param name="limit">The maximum number of results to return</param>
     /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items matching the search criteria</returns>
-    [HttpGet("search/{tenantId}")]
+    [HttpGet("search/{tenantId}", Name = "SeachMetadata")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> SearchAsync(
         [FromServices] IItemMetadataQuery query,

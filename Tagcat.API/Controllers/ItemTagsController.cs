@@ -25,7 +25,7 @@ public class ItemTagsController : ControllerBase
     /// <param name="command">The set tags command</param>
     /// <param name="contextAccessor">The HTTP context accessor</param>
     /// <returns>The command result</returns>
-    [HttpPost]
+    [HttpPost(Name = "SetTags")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
@@ -44,7 +44,7 @@ public class ItemTagsController : ControllerBase
     /// <param name="contextAccessor">The HTTP context accessor</param>
     /// <param name="command">The add tags command</param>
     /// <returns>The command result</returns>
-    [HttpPost("add")]
+    [HttpPost("add", Name = "AddTags")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> AddAsync(
@@ -63,7 +63,7 @@ public class ItemTagsController : ControllerBase
     /// <param name="contextAccessor">The HTTP context accessor</param>
     /// <param name="command">The remove tags command</param>
     /// <returns>The command result</returns>
-    [HttpPost("remove")]
+    [HttpPost("remove", Name = "RemoveTags")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> RemoveAsync(
@@ -84,7 +84,7 @@ public class ItemTagsController : ControllerBase
     /// <param name="tenantId">The tenant ID for the item</param>
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of relationships on the item</returns>
-    [HttpGet("{tenantId}/{id}")]
+    [HttpGet("{tenantId}/{id}", Name = "GetTagsById")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     public Task<IEnumerable<ItemTagViewEntry>> GetByIdAsync(
@@ -107,7 +107,7 @@ public class ItemTagsController : ControllerBase
     /// <param name="limit">The maximum number of results to return</param>
     /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items with the matching tag</returns>
-    [HttpGet("search/{tenantId}")]
+    [HttpGet("search/{tenantId}", Name = "GetItemsWithTags")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> GetItemsByTagAsync(
         [FromServices] IItemTagQuery query,

@@ -22,7 +22,7 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="handler">The command handler</param>
     /// <param name="command">The set relationships command</param>
     /// <returns>The command result</returns>
-    [HttpPost]
+    [HttpPost(Name = "SetRelationships")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> SetAsync(
@@ -36,7 +36,7 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="handler">The command handler</param>
     /// <param name="command">The add relationships command</param>
     /// <returns>The command result</returns>
-    [HttpPost("add")]
+    [HttpPost("add", Name = "AddRelationships")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> AddAsync(
@@ -50,7 +50,7 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="handler">The command handler</param>
     /// <param name="command">The remove relationships command</param>
     /// <returns>The command result</returns>
-    [HttpPost("remove")]
+    [HttpPost("remove", Name = "RemoveRelationships")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
     public Task<CommandResult> RemoveAsync(
@@ -65,7 +65,7 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="tenantId">The tenant ID for the item</param>
     /// <param name="id">The ID of the item</param>
     /// <returns>A list of relationships on the item</returns>
-    [HttpGet("{tenantId}/{id}")]
+    [HttpGet("{tenantId}/{id}", Name = "GetRelationshipsById")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
     public Task<IEnumerable<RelationshipEntry>> GetByIdAsync(
@@ -83,7 +83,7 @@ public class ItemRelationshipsController : ControllerBase
     /// <param name="limit">The maximum number of results to return</param>
     /// <param name="offset">An offset used to paginate results</param>
     /// <returns>A list of items matching the search criteria</returns>
-    [HttpGet("referencing/{tenantId}/{targetId}")]
+    [HttpGet("referencing/{tenantId}/{targetId}", Name = "GetRelationshipReferences")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public Task<IEnumerable<ItemResult>> GetReferencingAsync(
         [FromServices] IItemRelationshipQuery query, 
